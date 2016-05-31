@@ -17,15 +17,19 @@
     <div class="container">
       <div ng-controller="outcomeController as outcome">
         <h2>Outcome of Requests for Shelter</h2>
-        <ul>
-            <div class="chart1">
+        <div>
+        <div class="chart-CurrentSuicidalIdeation"></div>
+        <div class="chart-HistoryOfAggression"> </div>
+          
+          <div id="{{demographic}}-chart" ng-repeat="(demographic, values) in filteredData">
+            <div class="chart-{{demographic}}">
             </div>
-          <li id="{{demographic}}-chart" ng-repeat="(demographic, values) in filteredData">
             
               <p>Chart</p>           
                 Data for {{demographic}}: {{values}}  
-          </li>
-        </ul>
+
+          </div>
+        </div>
 
       </div>
     </div>

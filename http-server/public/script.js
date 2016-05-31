@@ -7,7 +7,8 @@
 	var filterTypes = {age: {api: ""}, mental: {api: ""}, substanceAbuse:{api: ""}, english:{api: ""}, immigrationStatus:{api: ""}, genderId:{api: ""}, traffickingType:{api: ""}, children:{api: ""}, violence: {api: 'http://localhost:3000/db'}, disability:{api: ""}}
 	
 	
-	function outcomesDataByFilter(type, callback){
+	function outcomesDataByFilter(type){
+        console.log('function: outcomesDataByFilter');
 		var apiUrl = filterTypes[type].api
 		var outcome = this;
 		outcome.demographics = [];
@@ -17,10 +18,12 @@
 							
 							outcome.demographics = data;
 							$scope.filteredData = outcome.demographics;
-							for (demographic in outcome.demographics){
+							
+                            for (demographic in outcome.demographics){
 								
                                 showGraph(demographic, data[demographic][0])
 							}
+                      
 						});					
 	};
 	
@@ -29,7 +32,7 @@
 	// for (var type in filtersList){
 	// 	outcomesDataByFilter(type)
 	// }
-	outcomesDataByFilter("violence", showGraph)
+	outcomesDataByFilter("violence")
 	// showGraph()
 
 
@@ -40,7 +43,7 @@ function showGraph(demo, outcomeData) {
 	console.log(demo)
 	console.log(outcomeData)
 		// when scope issue solved attach chart to: $('#' + demo + '-chart.ng-scope')
-    $('.chart1').highcharts({
+    $('.chart-' + demo).highcharts({
         chart: {
             type: 'column'
         },
