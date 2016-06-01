@@ -18,16 +18,19 @@
       <div ng-controller="outcomeController as outcome">
         <h2>Outcome of Requests for Shelter</h2>
         <div>
-        <div class="chart-CurrentSuicidalIdeation"></div>
+        <!--  <div class="chart-CurrentSuicidalIdeation"></div>
         <div class="chart-HistoryOfAggression"> </div>
-          
+        <div clas s="chart-18-24"></div> -->
+
+        <!-- this issue found at this SO inquiry -->
           <div id="{{demographic}}-chart" ng-repeat="(demographic, values) in filteredData">
             <div class="chart-{{demographic}}">
             </div>
             
-              <p>Chart</p>           
+              <p>Chart</p> 
+              <div class="chart-HistoryOfAggression"></div> 
+              <p>Data for Chart</p>       
                 Data for {{demographic}}: {{values}}  
-
           </div>
         </div>
 

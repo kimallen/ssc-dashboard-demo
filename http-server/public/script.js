@@ -4,34 +4,32 @@
 	
 	app.controller("outcomeController", ['$scope', '$http', function($scope,$http){
 
-	var filterTypes = {age: {api: ""}, mental: {api: ""}, substanceAbuse:{api: ""}, english:{api: ""}, immigrationStatus:{api: ""}, genderId:{api: ""}, traffickingType:{api: ""}, children:{api: ""}, violence: {api: 'http://localhost:3000/db'}, disability:{api: ""}}
+	// var filterTypes = {age: {api: ""}, mental: {api: ""}, substanceAbuse:{api: ""}, english:{api: ""}, immigrationStatus:{api: ""}, genderId:{api: ""}, traffickingType:{api: ""}, children:{api: ""}, violence: {api: 'http://localhost:3000/db'}, disability:{api: ""}}
 	
 	
 	function outcomesDataByFilter(type){
         console.log('function: outcomesDataByFilter');
-		var apiUrl = filterTypes[type].api
+        var apiUrl = 'http://localhost:3000/db'
 		var outcome = this;
-		outcome.demographics = [];
+		outcome.filters = [];
 		
 		$http.get(apiUrl)
 						.success(function(data){
+							console.log(data)
+                            
+							outcome.filters = data;
+							$scope.filteredData = outcome.filters[type];
+                            var subDemographics = outcome.filters[type]
 							
-							outcome.demographics = data;
-							$scope.filteredData = outcome.demographics;
-							
-                            for (demographic in outcome.demographics){
+                            for (subDemographic in subDemographics){
 								
-                                showGraph(demographic, data[demographic][0])
+                                showGraph(subDemographic, subDemographics[subDemographic])
 							}
                       
 						});					
 	};
 	
-	// Use the below loop to show data for all filters
-	// var filtersList = Object.keys(filterTypes)
-	// for (var type in filtersList){
-	// 	outcomesDataByFilter(type)
-	// }
+	
 	outcomesDataByFilter("violence")
 	// showGraph()
 
@@ -40,9 +38,8 @@
 })();
 
 function showGraph(demo, outcomeData) {
-	console.log(demo)
-	console.log(outcomeData)
-		// when scope issue solved attach chart to: $('#' + demo + '-chart.ng-scope')
+	   console.log("Showing this " + demo)
+		// when scope or timing issue solved attach chart to: $('#' + demo + '-chart.ng-scope')
     $('.chart-' + demo).highcharts({
         chart: {
             type: 'column'
