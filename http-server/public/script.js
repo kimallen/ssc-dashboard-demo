@@ -1,7 +1,7 @@
 (function(){
 
-	var app = angular.module('dashboard', []);
-	
+	var app = angular.module('dashboard', ['highcharts-ng']);
+	// var myapp = angular.module('myapp', ["highcharts-ng"])
 	app.controller("outcomeController", ['$scope', '$http', function($scope,$http){
 
 	// var filterTypes = {age: {api: ""}, mental: {api: ""}, substanceAbuse:{api: ""}, english:{api: ""}, immigrationStatus:{api: ""}, genderId:{api: ""}, traffickingType:{api: ""}, children:{api: ""}, violence: {api: 'http://localhost:3000/db'}, disability:{api: ""}}
