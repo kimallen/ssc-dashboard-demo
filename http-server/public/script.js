@@ -25,14 +25,22 @@
         function populateCharts(response){
             
             var subDemographics = response["violence"]
-            var maxY = 0
-            var newMax = 0
-            for (subDemographic in subDemographics){
-                var outcomes = subDemographics[subDemographic]
-                var outcomeValues = Object.keys( outcomes ).map(function ( key ) { return outcomes[key]; }); 
-                newMaxY = Math.max(...outcomeValues)
-                if (newMaxY > maxY){maxY = newMaxY}
+            // var subDemographics = response[filterType]
+
+            //This function gets the maximum value to use for all charts in the chosen filter
+            function getMaxY(){
+                var maxY = 0
+                var newMax = 0
+                
+                for (subDemographic in subDemographics){
+                    var outcomes = subDemographics[subDemographic]
+                    var outcomeValues = Object.keys( outcomes ).map(function ( key ) { return outcomes[key]; }); 
+                    newMaxY = Math.max(...outcomeValues)
+                    if (newMaxY > maxY){maxY = newMaxY}
+                }
+                return maxY
             }
+            var maxY = getMaxY()
 
             // loops through each of the sub-categories within the chosen filter type
             for (subDemographic in subDemographics){
@@ -129,10 +137,6 @@
                           
                           useHighStocks: false,
                           
-                          size: {
-                           width: 600,
-                           height: 400
-                          },
                           //function (optional)
                           func: function (chart) {
                            //setup some logic for the chart

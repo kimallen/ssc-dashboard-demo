@@ -19,9 +19,9 @@
       <div ng-controller="outcomeController as outcome">
         <h2>Outcome of Requests for Shelter</h2>
         <div ng-repeat="chartConfig in outcome.chartConfigs">
-          <p>Chart</p> 
-          <highchart config="chartConfig"></highchart>
-        
+          <div class = "small-multiple">
+            <highchart config="chartConfig"></highchart>
+          </div>
         </div>
       </div>
 
