@@ -12,35 +12,34 @@
 		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 		<!-- <script src="../bower_components/c3/c3.min.js"></script> -->
     <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="/bower_components/highcharts-ng/dist/highcharts-ng.min.js"></script>
   </head>
   <body>
     <div class="container">
       <div ng-controller="outcomeController as outcome">
         <h2>Outcome of Requests for Shelter</h2>
-        <div>
-        <!--  <div class="chart-CurrentSuicidalIdeation"></div>
-        <div class="chart-HistoryOfAggression"> </div>
-        <div clas s="chart-18-24"></div> -->
-
-        <!-- this issue found at this SO inquiry -->
-          <div id="{{demographic}}-chart" ng-repeat="(demographic, values) in filteredData">
-            <div class="chart-{{demographic}}">
-            </div>
-            
-              <p>Chart</p> 
-              <div class="chart-HistoryOfAggression"></div> 
-              <highchart id="chart1" config="chartConfig"></highchart>
-              <p>Data for Chart</p>       
-                Data for {{demographic}}: {{values}}  
-          </div>
+        <div ng-repeat="chartConfig in outcome.chartConfigs">
+          <p>Chart</p> 
+          <highchart config="chartConfig"></highchart>
+        
         </div>
-
       </div>
-    </div>
 
-    
+    </div>
 
     <script src="script.js"></script>
   </body>
 </html>
 
+        <!-- this issue found at this SO inquiry -->
+        <!-- http://stackoverflow.com/questions/30685321/jquery-functions-not-working-with-ng-repeat -->
+          
+          <!-- <div id="{{demographic}}-chart" ng-repeat="(demographic, values) in filteredData"> -->
+            
+              <!-- <highchart id="chart-{{demographic}}">
+              </highchart>
+            
+              <div class="chart-HistoryOfAggression"></div> 
+              <highchart config="chartConfig"></highchart> -->
+              <!-- <p>Data for Chart</p>       
+                Data for {{demographic}}: {{values}}   -->
