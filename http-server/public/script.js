@@ -24,8 +24,16 @@
         //this function populates the charts for each category
         function populateCharts(response){
             
-            var subDemographics = response["age"]
-            
+            var subDemographics = response["violence"]
+            var maxY = 0
+            var newMax = 0
+            for (subDemographic in subDemographics){
+                var outcomes = subDemographics[subDemographic]
+                var outcomeValues = Object.keys( outcomes ).map(function ( key ) { return outcomes[key]; }); 
+                newMaxY = Math.max(...outcomeValues)
+                if (newMaxY > maxY){maxY = newMaxY}
+            }
+
             // loops through each of the sub-categories within the chosen filter type
             for (subDemographic in subDemographics){
                 var outcomes = subDemographics[subDemographic]
@@ -57,6 +65,7 @@
                                 },
                                 yAxis: {
                                     min: 0,
+                                    max: maxY, //create a loop to adjust based on max value in data
                                     title: {
                                         text: 'Total requests'
                                     },
