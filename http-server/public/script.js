@@ -4,7 +4,32 @@
 	
 	app.controller("outcomeController", ['$scope', '$http',outcomeController]);
 
+    app.controller("filterController", ['$scope', '$http', filterController]);
 
+    // This function allows user to select one or more demographic filters
+    function filterController($scope, $http){
+        
+        $scope.demoFilter = {
+            demoSelect: "ALL",
+            demoOptions: [
+            {value: "ALL", name: "ALL"},
+            {value: "age", name: "age"}, 
+            {value: "violence", name: "History of violence"},
+            {value: "english", name: "English Proficiency"},
+            {value: "mental", name: "Current mental health" },
+            {value: "substanceAbuse", name: "Current Substance Abuse"},
+            {value: "immigrationStatus", name: "Immigration Status"},
+            {value: "genderId", name: "Gender identity"},
+            {value: "traffickingType", name: "Type of trafficking/violence"},
+            {value: "children", name: "Accompanying Children"},
+            {value: "disability", name: "Physical disability"}
+            ]
+        }
+
+        function getSelectedData (){
+            apiUrl
+        }
+    }
     function outcomeController($scope, $http){
         
         var viewModel = this
@@ -24,7 +49,7 @@
         //this function populates the charts for each category
         function populateCharts(response){
             
-            var subDemographics = response["violence"]
+            var subDemographics = response["age"]   
             // var subDemographics = response[filterType]
 
             //This function gets the maximum value to use for all charts in the chosen filter
@@ -136,6 +161,7 @@
                           loading: false,
                           
                           useHighStocks: false,
+                          
                           
                           //function (optional)
                           func: function (chart) {
