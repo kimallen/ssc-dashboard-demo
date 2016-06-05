@@ -49,7 +49,7 @@
         //this function populates the charts for each category
         function populateCharts(response){
             
-            var subDemographics = response["age"]   
+            var subDemographics = response["age"]       
             // var subDemographics = response[filterType]
 
             //This function gets the maximum value to use for all charts in the chosen filter
