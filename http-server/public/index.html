@@ -19,18 +19,18 @@
     <h1>Safe Shelters: Dashboard</h1>
     <div ng-controller="outcomeController as outcome">
     
-        <div ng-controller= "filterController as filter">
+        
           <form name="demoFilters">
             <label for="demoSelect"> Select Demographic Filter: </label><br>
-            <select name="demoSelect" ng-model="demoFilter.demoSelect" >
+            <select name="demoSelect" ng-model="outcome.demoFilter.demoSelect" ng-change = "outcome.populateCharts(outcome.demoFilter.demoSelect)">
             <!-- <option name="age">Age</option>
             <option name="violence">History of Violence</option> -->
-              <option ng-repeat="option in demoFilter.demoOptions" value="{{option.value}}">{{option.name}}</option>
+              <option ng-repeat="option in outcome.demoFilter.demoOptions" value="{{option.value}}">{{option.name}}</option>
             </select>
             <!-- <p>selectedData: {{filteredData}}</p> -->
           </form>
-             <p>value of selection: {{demoFilter.demoSelect}}</p>
-        </div>
+             <p>value of selection: {{outcome.demoFilter.demoSelect}}</p>
+        
         
       <h2>Outcome of Requests for Shelter</h2>
       <div ng-repeat="chartConfig in outcome.chartConfigs">

@@ -2,14 +2,15 @@
 
 	var app = angular.module('dashboard', ['highcharts-ng']);
 	
-	app.controller("outcomeController", ['$scope', '$http',outcomeController]);
-
-    app.controller("filterController", ['$scope', '$http', filterController]);
-
-    // This function allows user to select one or more demographic filters
-    function filterController($scope, $http){
+	app.controller("outcomeController", ['$http', outcomeController]);
+    
+    function outcomeController($http){
         
-        $scope.demoFilter = {
+        var viewModel = this
+        viewModel.populateCharts = populateCharts
+        viewModel.chartConfigs = [];
+
+        viewModel.demoFilter = {
             demoSelect: "ALL",
             demoOptions: [
             {value: "ALL", name: "ALL"},
@@ -26,30 +27,31 @@
             ]
         }
 
-        function getSelectedData (){
-            apiUrl
-        }
-    }
-    function outcomeController($scope, $http){
-        
-        var viewModel = this
-        
-        viewModel.chartConfigs = [];
-        
+        var outcomesData = {};
         //This function retrieves data from api, takes in the filter type, and builds small multiples charts of each of the filter's categories
         
         // outcomesDataByFilter("age")
 
-        // function outcomesDataByFilter(filterType){
             var apiUrl = 'http://localhost:3000/db'
             $http.get(apiUrl)
-            .success(populateCharts)
-        // };
+            .then(storeResponseData)
+            // .then(populateDefaultChart)
         
-        //this function populates the charts for each category
-        function populateCharts(response){
+        function storeResponseData(response){
             
-            var subDemographics = response["age"]       
+            outcomesData = response.data
+            populateDefaultChart()
+        };
+
+        function populateDefaultChart(){
+            populateCharts("ALL")
+        }
+
+        //this function populates the charts for each category
+        function populateCharts(filterType){
+            console.log("filter type: " + filterType)
+            viewModel.chartConfigs = [];
+            var subDemographics = outcomesData[filterType]       
             // var subDemographics = response[filterType]
 
             //This function gets the maximum value to use for all charts in the chosen filter
