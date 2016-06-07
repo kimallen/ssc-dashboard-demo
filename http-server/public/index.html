@@ -20,16 +20,16 @@
     <div ng-controller="outcomeController as outcome">
     
         
-          <form name="demoFilters">
-            <label for="demoSelect"> Select Demographic Filter: </label><br>
-            <select name="demoSelect" ng-model="outcome.demoFilter.demoSelect" ng-change = "outcome.populateCharts(outcome.demoFilter.demoSelect)">
+          <form name="demogFilters">
+            <label for="demogSelect"> Select demographic Filter: </label><br>
+            <select name="demogSelect" ng-model="outcome.demogFilter.demogSelect" ng-change = "outcome.populateCharts(outcome.demogFilter.demogSelect)">
             <!-- <option name="age">Age</option>
             <option name="violence">History of Violence</option> -->
-              <option ng-repeat="option in outcome.demoFilter.demoOptions" value="{{option.value}}">{{option.name}}</option>
+              <option ng-repeat="option in outcome.demogFilter.demogOptions" value="{{option.value}}">{{option.name}}</option>
             </select>
             <!-- <p>selectedData: {{filteredData}}</p> -->
           </form>
-             <p>value of selection: {{outcome.demoFilter.demoSelect}}</p>
+             <p>value of selection: {{outcome.demogFilter.demogSelect}}</p>
         
         
       <h2>Outcome of Requests for Shelter</h2>
