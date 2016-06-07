@@ -6,11 +6,10 @@
     
     function outcomeController($http){
         
-        var viewModel = this
-        viewModel.populateCharts = populateCharts
-        viewModel.chartConfigs = [];
-
-        viewModel.demogFilter = {
+        var vm = this
+        vm.populateCharts = populateCharts
+        vm.chartConfigs = [];
+        vm.demogFilter = { 
             demogSelect: "ALL",
             demogOptions: [
             {value: "ALL", name: "ALL"},
@@ -44,10 +43,19 @@
 
         //This uses data from api, takes in the filter type, and builds small multiples charts of each of the filter's categories
         function populateCharts(filterType){
-            viewModel.chartConfigs = [];
+            vm.chartConfigs = [];
             var subDemographics = outcomesData[filterType]       
+            var maxY = getMaxY() //maxY is used in getChartConfig to set Y axis
 
-            //This function gets the maximum value to use for all charts in the chosen filter
+            // loops through each of the sub-categories within the chosen filter type
+            for (subDemographic in subDemographics){
+                var outcomes = subDemographics[subDemographic]
+                var chartConfig = getChartConfig(subDemographic, outcomes)
+                vm.chartConfigs.push(chartConfig);
+            } //closes FOR loop
+
+
+            //This function gets the maximum value to use for the Y axis all charts in the chosen filter
             function getMaxY(){
                 var maxY = 0
                 var newMax = 0
@@ -61,16 +69,6 @@
                 return maxY
             }
 
-            var maxY = getMaxY()
-
-            // loops through each of the sub-categories within the chosen filter type
-            for (subDemographic in subDemographics){
-                var outcomes = subDemographics[subDemographic]
-                var chartConfig = getChartConfig(subDemographic, outcomes)
-                viewModel.chartConfigs.push(chartConfig);
-            } //closes FOR loop
-
-            
             //Builds config info for a single chart
             function getChartConfig(subDemographic, outcomes){ 
 
@@ -155,13 +153,7 @@
 
                       loading: false,
                       
-                      useHighStocks: false,
-                      
-                      
-                      //function (optional)
-                      func: function (chart) {
-                       //setup some logic for the chart
-                      }
+                      useHighStocks: false,                   
                     
                 };//closes chartConfig object
                 return chartConfig
