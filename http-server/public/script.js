@@ -133,16 +133,13 @@
                       series: [{
                             name: "Placed",
                             data: [[0, outcomes["placement"]]]
-                            // data: [outcomes["placement"], outcomes["no placement"] ]
                         },
                         {
                             name: "Referred",
-                            // data: [5, 4]
                             data: [[0, outcomes["referred"]]]
                         },
                          {
                             name: 'Not placed',
-                            // data: [2, 7]
                             data: [[1, outcomes["referred"]]]
                         },
                         {
