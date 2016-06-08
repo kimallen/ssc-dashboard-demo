@@ -52,6 +52,7 @@
                 var outcomes = subDemographics[subDemographic]
                 var chartConfig = getChartConfig(subDemographic, outcomes)
                 vm.chartConfigs.push(chartConfig);
+                console.log(chartConfig.id)
             } //closes FOR loop
 
 
@@ -105,9 +106,9 @@
                             },
                             legend: {
                                 align: 'right',
-                                x: -30,
-                                verticalAlign: 'top',
-                                y: 25,
+                                x: 0,
+                                verticalAlign: 'bottom',
+                                y: 40,
                                 floating: true,
                                 backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
                                 borderColor: '#CCC',

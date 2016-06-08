@@ -1,4 +1,12 @@
-small-multiple {
-	/*width: 350px;*/
-	display: inline;
+.small-multiples {
+	width: 20%;
+
+	display: inline-block;
+	margin: 1%;
+	/*border: 1px solid black;*/
+}
+
+.small {
+	border: 1px solid black;
+	height: 300px;
 }
