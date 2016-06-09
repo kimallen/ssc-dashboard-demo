@@ -63,7 +63,9 @@
                 for (subDemographic in subDemographics){
                     var outcomes = subDemographics[subDemographic]
                     var outcomeValues = Object.keys( outcomes ).map(function ( key ) { return outcomes[key]; }); 
-                    newMaxY = Math.max(...outcomeValues)
+                    var success = outcomeValues[0] + outcomeValues[1]
+                    var successNot = outcomeValues[2] + outcomeValues[3]
+                    newMaxY = Math.max(success, successNot)
                     if (newMaxY > maxY){maxY = newMaxY}
                 }
                 return maxY
@@ -81,7 +83,10 @@
                                   marginTop: 100
                             },
                             title: {
-                                text: 'by ' + subDemographic
+                                text: 'by ' + subDemographic,
+                                margin: 30,
+                                floating: true,
+                                // y: -30
                             },
                               tooltip: {
                                 headerFormat: '<b>{point.x}</b><br/>',
