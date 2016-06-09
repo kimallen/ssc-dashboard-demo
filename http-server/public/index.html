@@ -37,7 +37,7 @@
      
       <div ng-repeat="chartConfig in outcome.chartConfigs" class="small-multiples">
           
-          <highchart class="small" config="chartConfig"></highchart>
+          <highchart class="small" id="{{chartConfig.id}}" config="chartConfig"></highchart>
 
       </div>
       

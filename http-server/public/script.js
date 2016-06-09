@@ -55,8 +55,7 @@
                 console.log(chartConfig.id)
             } //closes FOR loop
 
-
-            //This function gets the maximum value to use for the Y axis all charts in the chosen filter
+            //This function gets the maximum value to use for the Y axis for all charts in the chosen filter
             function getMaxY(){
                 var maxY = 0
                 var newMax = 0
@@ -78,17 +77,18 @@
                         options: {
                   
                             chart: {
-                                  type: 'column'
+                                  type: 'column',
+                                  marginTop: 100
                             },
                             title: {
-                                text: 'Request Outcomes by ' + subDemographic
+                                text: 'by ' + subDemographic
                             },
                               tooltip: {
                                 headerFormat: '<b>{point.x}</b><br/>',
                                 pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
                             },
                             xAxis: {
-                                categories: ['Success', 'Not Placed/Other']
+                                categories: ['Placed/Referred', 'Not Placed/Other']
                             },
                             yAxis: {
                                 min: 0,
@@ -105,17 +105,19 @@
                                 }
                             },
                             legend: {
-                                align: 'right',
-                                x: 0,
-                                verticalAlign: 'bottom',
-                                y: 40,
-                                floating: true,
-                                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-                                borderColor: '#CCC',
-                                borderWidth: 1,
-                                shadow: false
+                                enabled: false
+                            //     align: 'right',
+                            //     x: 0,
+                            //     verticalAlign: 'bottom',
+                            //     y: 40,
+                            //     floating: true,
+                            //     backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+                            //     borderColor: '#CCC',
+                            //     borderWidth: 1,
+                            //     shadow: false
                             },
                             plotOptions: {
+                                margin: 50,
                                 column: {
                                     stacking: 'normal',
                                     dataLabels: {
