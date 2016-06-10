@@ -10,21 +10,21 @@
 		margin: 1%;
 }
 
-@media only screen and (min-width: 360px ){
+@media all and (min-width: 360px ){
 	.small-multiples {
 		width: 48%;
 	}
 	
 }
 
-@media only screen and (min-width: 450px ){
+@media all and (min-width: 450px ){
 	.small-multiples {
 		width: 31%;
 	}
 	
 }
 
-@media only screen and (min-width: 763px){
+@media all and (min-width: 763px){
 	.small-multiples {
 		width: 23%;
 
