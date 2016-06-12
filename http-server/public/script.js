@@ -26,11 +26,39 @@
             ]
         }
 
+        vm.regionFilter = {
+            regionSelect: "ALL",
+            regionOptions: [
+                {value: "ALL", name: "ALL"},
+                {value: "NJ", name: "New Jersey"},
+                {value: "Bay Area", name: "SF Bay Area"}
+            ]
+        }
+
+        var datesRegion = {}
         var outcomesData = {};
 
         var apiUrl = 'http://localhost:3000/db'
         $http.get(apiUrl)
         .then(storeResponseData)
+
+        // This function retrieves data from backend based on selected dates and ranges
+        function getDatesRegion(options = {}){
+            var formData = {options.dates, options.region}
+            $http.(apiUrl, formData )
+                .then(storeResponseData)
+        };
+
+        function defaultDatesRegion(){
+            getDatesRegion(
+                {
+                dates:[
+            "2016-06-06T21:19:44.867Z",
+            "2016-06-12T21:19:44.867Z"
+        ], region: "ALL"
+    })
+        }
+        
         
         function storeResponseData(response){
             outcomesData = response.data
@@ -77,16 +105,14 @@
                 var chartConfig = {
                         id: "chart-" + subDemographic,
                         options: {
-                  
+                            color: ['#1C5DB2', '#4294FF', '#B2780A', '#FFC353'],
                             chart: {
                                   type: 'column',
                                   marginTop: 100
                             },
                             title: {
                                 text: 'by ' + subDemographic,
-                                margin: 30,
-                                floating: true,
-                                // y: -30
+                                floating: true
                             },
                               tooltip: {
                                 headerFormat: '<b>{point.x}</b><br/>',
@@ -97,7 +123,7 @@
                             },
                             yAxis: {
                                 min: 0,
-                                max: maxY, //create a loop to adjust based on max value in data
+                                max: maxY, 
                                 title: {
                                     text: 'Total requests'
                                 },
