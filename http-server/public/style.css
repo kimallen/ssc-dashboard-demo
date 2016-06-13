@@ -1,13 +1,13 @@
 
 .small {
-	border: 1px solid black;
 	height: 350px;
+	border: 1px solid black;
 }
 
 .small-multiples {
 
-		display: inline-block;
-		margin: 1%;
+	display: inline-block;
+	margin: 5px;
 }
 
 @media all and (min-width: 360px ){

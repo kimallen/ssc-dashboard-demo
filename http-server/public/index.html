@@ -17,35 +17,37 @@
     <div ng-controller="outcomeController as outcome">
    
     <!-- Dropdown for Regions -->
-      <form name="regionSelect">
-        <label for = "regionSelect"> Select Region: </label><br>
-        <select name="demogSelect" ng-model="outcome.regionFilter.regionSelect">
-          <option ng-repeat="option in outcome.regionFilter.regionOptions" value="{{option.value}}">
-          {{option.name}}
-          </option>
-        </select>
-      </form>
-        
+      <div id="region-selector" class="selector">
+        <form name="regionSelect">
+          <label for = "regionSelect"> Select Region: </label><br>
+          <select name="demogSelect" ng-model="outcome.regionFilter.regionSelect" ng-change="getDatesRegion">
+            <option ng-repeat="option in outcome.regionFilter.regionOptions" value="{{option.value}}">
+            {{option.name}}
+            </option>
+          </select>
+        </form>
+      </div> 
       <!-- Dropdown for Demographic Filters -->
-      <form name="demogFilters">
-        <label for="demogSelect"> Select demographic Filter: </label><br>
-        <select name="demogSelect" ng-model="outcome.demogFilter.demogSelect" ng-change = "outcome.populateCharts(outcome.demogFilter.demogSelect)">
-          <option ng-repeat="option in outcome.demogFilter.demogOptions" value="{{option.value}}">{{option.name}}
-          </option>
-        </select>
-      </form>
-        
+      <div id="demog-selector" class="selector">
+        <form name="demogFilters">
+          <label for="demogSelect"> Select demographic Filter: </label><br>
+          <select name="demogSelect" ng-model="outcome.demogFilter.demogSelect" ng-change = "outcome.populateCharts(outcome.demogFilter.demogSelect)">
+            <option ng-repeat="option in outcome.demogFilter.demogOptions" value="{{option.value}}">{{option.name}}
+            </option>
+          </select>
+        </form>
+      </div>
         
       <h2>Outcome of Requests for Shelter</h2>
        <h3>by {{outcome.demogFilter.demogSelect}}</h3>
+
         <p>Note: Individual participants can be represented in more than one graph. (Ex. The outcome of an individual with a history of current suicidal ideation and a history of aggression will be a number in each of those graphs)</p>
      
-      <div ng-repeat="chartConfig in outcome.chartConfigs" class="small-multiples">
-          
-          <highchart class="small" id="{{chartConfig.id}}" config="chartConfig"></highchart>
-
+      <div class="charts-block">
+        <div ng-repeat="chartConfig in outcome.chartConfigs" class="small-multiples">          
+            <highchart class="small" id="{{chartConfig.id}}" config="chartConfig"></highchart>
+        </div>
       </div>
-      
     </div>
 
     </div>

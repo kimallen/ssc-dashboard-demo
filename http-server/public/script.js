@@ -39,24 +39,33 @@
         var outcomesData = {};
 
         var apiUrl = 'http://localhost:3000/db'
-        $http.get(apiUrl)
-        .then(storeResponseData)
+        // $http.get(apiUrl)
+        // .then(storeResponseData)
 
-        // This function retrieves data from backend based on selected dates and ranges
-        function getDatesRegion(options = {}){
-            var formData = {options.dates, options.region}
-            $http.(apiUrl, formData )
-                .then(storeResponseData)
+        defaultDataByDatesRegion()
+        
+        function dataError(){
+            
+        }
+        // // This function retrieves data from backend based on selected dates and ranges
+        function getDataByDatesRegion(opt = {}){
+            var apiUrlQuery = apiUrl
+            // var apiUrlQuery = apiUrl + "?dates=" + opt.dates + "&region=" + opt.region
+            $http.get(apiUrlQuery)
+            .catch
+            .then(storeResponseData)
         };
 
-        function defaultDatesRegion(){
-            getDatesRegion(
+
+        function defaultDataByDatesRegion(){
+            getDataByDatesRegion(
                 {
                 dates:[
-            "2016-06-06T21:19:44.867Z",
-            "2016-06-12T21:19:44.867Z"
-        ], region: "ALL"
-    })
+                    "2016-06-06T21:19:44.867Z",
+                    "2016-06-12T21:19:44.867Z"
+                ], 
+                region: "ALL"
+            })
         }
         
         
@@ -80,7 +89,6 @@
                 var outcomes = subDemographics[subDemographic]
                 var chartConfig = getChartConfig(subDemographic, outcomes)
                 vm.chartConfigs.push(chartConfig);
-                console.log(chartConfig.id)
             } //closes FOR loop
 
             //This function gets the maximum value to use for the Y axis for all charts in the chosen filter
@@ -104,8 +112,9 @@
 
                 var chartConfig = {
                         id: "chart-" + subDemographic,
+                        
                         options: {
-                            color: ['#1C5DB2', '#4294FF', '#B2780A', '#FFC353'],
+                            colors: ['#1C5DB2', '#4294FF', '#B2780A', '#FFC353'],
                             chart: {
                                   type: 'column',
                                   marginTop: 100
@@ -136,16 +145,16 @@
                                 }
                             },
                             legend: {
-                                enabled: false
-                            //     align: 'right',
-                            //     x: 0,
-                            //     verticalAlign: 'bottom',
-                            //     y: 40,
-                            //     floating: true,
-                            //     backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-                            //     borderColor: '#CCC',
-                            //     borderWidth: 1,
-                            //     shadow: false
+                                // enabled: false
+                                align: 'right',
+                                x: 0,
+                                verticalAlign: 'bottom',
+                                // y: 40,
+                                // floating: true,
+                                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+                                borderColor: '#CCC',
+                                borderWidth: 1,
+                                shadow: false
                             },
                             plotOptions: {
                                 margin: 50,
