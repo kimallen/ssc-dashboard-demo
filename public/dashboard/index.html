@@ -9,7 +9,7 @@
     <script src="/bower_components/highcharts-ng/dist/highcharts-ng.min.js"></script>
     <!-- Include Date Range Picker -->
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-    <script src="../bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
+    <script src="/bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
     
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
@@ -26,9 +26,12 @@
     <div id= "date-selector" class="selector">
         <p>Select a Date:</p>
         
-        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-        <input ng-model="dateString" type="text" name="daterange" class="form-control">
-        {{dateString}}
+        <input date-range-picker class="form-control date-picker" type="text" ng-model="outcome.datePicker.date" ng-change="outcome.datePicker.date" options= "outcome.datePickerOptions"/>
+        {{outcome.datePicker.date}}
+        <!-- <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> -->
+        
+        <!-- <input ng-model="dateString" type="text" name="daterange" class="form-control"> -->
+        <!-- {{dateString}} -->
         <!-- <form name = "dateSelect">
           <label for="dateSelect"> Select a Date:</label>
         </form> -->

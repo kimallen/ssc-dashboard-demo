@@ -34,12 +34,13 @@
                 {value: "Bay Area", name: "SF Bay Area"}
             ]
         }
-
+        vm.datePicker = {}
         vm.datePicker.date = {
             startDate: null,
             endDate: null
         }
-        
+        vm.datePickerOptions = getDatePickerOptions()
+
         var datesRegion = {}
         var outcomesData = {};
 
@@ -48,7 +49,25 @@
         .then(storeResponseData)
 
         // defaultDataByDatesRegion()
-        
+        // var datePickerOptions = getDatePickerOptions()
+        function getDatePickerOptions(){
+            var datePickerOptions = {
+                'showDropdowns': true,
+                'ranges': {
+                    'Today': [moment(), moment()],
+                       'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                       'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                       'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                       'This Month': [moment().startOf('month'), moment().endOf('month')],
+                       'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                'linkedCalendars': false,
+                'startDate': '01/01/2015',
+                'endDate': moment()
+            }
+            return datePickerOptions
+        };
+
         $('input[name="daterange"]').daterangepicker({ 
             "showDropdowns": true,
             "ranges": {
@@ -66,9 +85,7 @@
           console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
         });
 
-        function dataError(){
-            
-        }
+        
         // // This function retrieves data from backend based on selected dates and ranges
         function getDataByDatesRegion(opt = {}){
             var apiUrlQuery = apiUrl
