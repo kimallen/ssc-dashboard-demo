@@ -1,0 +1,33 @@
+
+.small {
+	height: 350px;
+	border: 1px solid black;
+}
+
+.small-multiples {
+
+	display: inline-block;
+	margin: 5px;
+}
+
+@media all and (min-width: 360px ){
+	.small-multiples {
+		width: 48%;
+	}
+	
+}
+
+@media all and (min-width: 450px ){
+	.small-multiples {
+		width: 31%;
+	}
+	
+}
+
+@media all and (min-width: 763px){
+	.small-multiples {
+		width: 23%;
+
+		/*border: 1px solid black;*/
+	}
+}
