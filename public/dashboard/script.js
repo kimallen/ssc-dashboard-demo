@@ -1,7 +1,7 @@
 (function(){
 
 	angular
-        .module('dashboard', ['highcharts-ng'])
+        .module('dashboard', ['highcharts-ng', 'daterangepicker'])
         .controller("outcomeController", ['$http', outcomeController]);
     
     function outcomeController($http){
@@ -35,6 +35,11 @@
             ]
         }
 
+        vm.datePicker.date = {
+            startDate: null,
+            endDate: null
+        }
+        
         var datesRegion = {}
         var outcomesData = {};
 
@@ -44,6 +49,23 @@
 
         // defaultDataByDatesRegion()
         
+        $('input[name="daterange"]').daterangepicker({ 
+            "showDropdowns": true,
+            "ranges": {
+                'Today': [moment(), moment()],
+                   'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                   'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                   'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                   'This Month': [moment().startOf('month'), moment().endOf('month')],
+                   'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            "linkedCalendars": false,
+            "startDate": "01/01/2015",
+            "endDate": moment(),
+        }, function(start, end, label) {
+          console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+        });
+
         function dataError(){
             
         }
