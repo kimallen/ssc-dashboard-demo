@@ -124,9 +124,19 @@
             var maxY = getMaxY() //maxY is used in getChartConfig to set Y axis
 
             // loops through each of the sub-categories within the chosen filter type
+            var subDemCount = Object.keys(subDemographics).length
+            var count = 0
+            
             for (subDemographic in subDemographics){
                 var outcomes = subDemographics[subDemographic]
                 var chartConfig = getChartConfig(subDemographic, outcomes)
+                // shows legend only for the last chart
+                // count++
+                // if (count === subDemCount){
+                //     chartConfig.options.legend.enabled = true
+                // }
+                // else {chartConfig.options.legend.enabled = false};
+
                 vm.chartConfigs.push(chartConfig);
             } //closes FOR loop
 
