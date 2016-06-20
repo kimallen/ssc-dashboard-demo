@@ -36,8 +36,8 @@
         }
         vm.datePicker = {}
         vm.datePicker.date = {
-            startDate: null,
-            endDate: null
+            startDate: moment().subtract(2, 'years'),
+            endDate: moment()
         }
         vm.datePickerOptions = getDatePickerOptions()
 
@@ -62,8 +62,8 @@
                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
                 },
                 'linkedCalendars': false,
-                'startDate': '01/01/2015',
-                'endDate': moment()
+                'startDate': '01/05/2015',
+                'endDate': moment().subtract(2, 'month')
             }
             return datePickerOptions
         };
