@@ -39,10 +39,10 @@
         var outcomesData = {};
 
         var apiUrl = 'http://localhost:3000/db'
-        // $http.get(apiUrl)
-        // .then(storeResponseData)
+        $http.get(apiUrl)
+        .then(storeResponseData)
 
-        defaultDataByDatesRegion()
+        // defaultDataByDatesRegion()
         
         function dataError(){
             
