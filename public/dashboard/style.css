@@ -1,3 +1,6 @@
+.selector {
+	display: inline-block;
+}
 
 .small {
 	height: 350px;

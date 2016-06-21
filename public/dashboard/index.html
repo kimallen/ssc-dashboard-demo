@@ -21,41 +21,43 @@
     <div class="container">
     <h1>Safe Shelters: Dashboard</h1>
     <div ng-controller="outcomeController as outcome">
-   
+    <div id="selector-container">
     <!-- Dropdown for dates -->
-    <div id= "date-selector" class="selector">
-        <p>Select a Date:</p>
-        
-        <input date-range-picker class="form-control date-picker" type="text" ng-model="outcome.datePicker.date" ng-change="outcome.datePicker.date" options= "outcome.datePickerOptions"/>
-        {{outcome.datePicker.date}}
-        <!-- <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> -->
-        
-        <!-- <input ng-model="dateString" type="text" name="daterange" class="form-control"> -->
-        <!-- {{dateString}} -->
-        <!-- <form name = "dateSelect">
-          <label for="dateSelect"> Select a Date:</label>
-        </form> -->
-      </div>
-    <!-- Dropdown for Regions -->
-      <div id="region-selector" class="selector">
-        <form name="regionSelect">
-          <label for = "regionSelect"> Select Region: </label><br>
-          <select name="demogSelect" ng-model="outcome.regionFilter.regionSelect" ng-change="getDatesRegion">
-            <option ng-repeat="option in outcome.regionFilter.regionOptions" value="{{option.value}}">
-            {{option.name}}
-            </option>
-          </select>
-        </form>
-      </div> 
-      <!-- Dropdown for Demographic Filters -->
-      <div id="demog-selector" class="selector">
-        <form name="demogFilters">
-          <label for="demogSelect"> Select demographic Filter: </label><br>
-          <select name="demogSelect" ng-model="outcome.demogFilter.demogSelect" ng-change = "outcome.populateCharts(outcome.demogFilter.demogSelect)">
-            <option ng-repeat="option in outcome.demogFilter.demogOptions" value="{{option.value}}">{{option.name}}
-            </option>
-          </select>
-        </form>
+      <div id= "date-selector" class="selector">
+          <label>Select a Date:</label>
+          
+          <div date-range-picker class="form-control date-picker" type="text" ng-model="outcome.datePicker.date" ng-change="outcome.datePicker.date" options= "outcome.datePickerOptions"/>
+            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i><b class="caret"></b>
+          </div>
+          <!-- {{outcome.datePicker.date}} -->
+          
+          <!-- <input ng-model="dateString" type="text" name="daterange" class="form-control"> -->
+          <!-- {{dateString}} -->
+          <!-- <form name = "dateSelect">
+            <label for="dateSelect"> Select a Date:</label>
+          </form> -->
+        </div>
+      <!-- Dropdown for Regions -->
+        <div id="region-selector" class="selector">
+          <form name="regionSelect">
+            <label for = "regionSelect"> Select Region: </label><br>
+            <select class="form-control" name="demogSelect" ng-model="outcome.regionFilter.regionSelect" ng-change="getDatesRegion">
+              <option ng-repeat="option in outcome.regionFilter.regionOptions" value="{{option.value}}">
+              {{option.name}}
+              </option>
+            </select>
+          </form>
+        </div> 
+        <!-- Dropdown for Demographic Filters -->
+        <div id="demog-selector" class="selector">
+          <form name="demogFilters">
+            <label for="demogSelect"> Select demographic Filter: </label><br>
+            <select class="form-control" name="demogSelect" ng-model="outcome.demogFilter.demogSelect" ng-change = "outcome.populateCharts(outcome.demogFilter.demogSelect)">
+              <option ng-repeat="option in outcome.demogFilter.demogOptions" value="{{option.value}}">{{option.name}}
+              </option>
+            </select>
+          </form>
+        </div>
       </div>
         
       <h2>Outcome of Requests for Shelter</h2>
