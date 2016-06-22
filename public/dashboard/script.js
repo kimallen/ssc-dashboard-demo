@@ -68,23 +68,6 @@
             return datePickerOptions
         };
 
-        // $('input[name="daterange"]').daterangepicker({ 
-        //     "showDropdowns": true,
-        //     "ranges": {
-        //         'Today': [moment(), moment()],
-        //            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        //            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-        //            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-        //            'This Month': [moment().startOf('month'), moment().endOf('month')],
-        //            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        //     },
-        //     "linkedCalendars": false,
-        //     "startDate": "01/01/2015",
-        //     "endDate": moment(),
-        // }, function(start, end, label) {
-        //   console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
-        // });
-
         
         // // This function retrieves data from backend based on selected dates and ranges
         function getDataByDatesRegion(opt = {}){
@@ -127,15 +110,21 @@
             var subDemCount = Object.keys(subDemographics).length
             var count = 0
             
+            // for building legend
+            var colors = ['#1C5DB2', '#4294FF', '#B2780A', '#FFC353']
+            var legendLabels = ['Placed', 'Referred', 'Not Placed', 'Other']
+            var legendAttr = []
+            vm.legendAttr = getLegendAttr()
+
             for (subDemographic in subDemographics){
                 var outcomes = subDemographics[subDemographic]
-                var chartConfig = getChartConfig(subDemographic, outcomes)
+                var chartConfig = getChartConfig(subDemographic, outcomes, colors)
                 // shows legend only for the last chart
-                // count++
-                // if (count === subDemCount){
-                //     chartConfig.options.legend.enabled = true
-                // }
-                // else {chartConfig.options.legend.enabled = false};
+                count++
+                if (count === subDemCount){
+                    chartConfig.options.legend.enabled = true
+                }
+                else {chartConfig.options.legend.enabled = false};
 
                 vm.chartConfigs.push(chartConfig);
             } //closes FOR loop
@@ -156,14 +145,20 @@
                 return maxY
             }
 
+            function getLegendAttr(){
+                for (var i = 0; i < colors.length; i++) {
+                    legendAttr.push({color: colors[i], label: legendLabels[i]})
+                }
+                return legendAttr
+            }
             //Builds config info for a single chart
-            function getChartConfig(subDemographic, outcomes){ 
+            function getChartConfig(subDemographic, outcomes, colors){ 
 
                 var chartConfig = {
                         id: "chart-" + subDemographic,
                         
                         options: {
-                            colors: ['#1C5DB2', '#4294FF', '#B2780A', '#FFC353'],
+                            colors: colors,
                             chart: {
                                   type: 'column',
                                   marginTop: 100
@@ -194,7 +189,7 @@
                                 }
                             },
                             legend: {
-                                // enabled: false
+                                enabled: false,
                                 align: 'right',
                                 x: 0,
                                 verticalAlign: 'bottom',
