@@ -4,17 +4,17 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script> -->
     
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="/bower_components/highcharts-ng/dist/highcharts-ng.min.js"></script>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
-    <!-- Include Date Range Picker -->
+    <!-- Date Range Picker -->
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
     <script src="/bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
     
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
     <meta name="viewport" content= "width=device-width, inital-scale=1.0">
@@ -40,9 +40,9 @@
 
         <div class="collapse navbar-collapse" id="menu">
           <ul class="nav navbar-nav nav-tabs">
-            <!-- <li><a ui-sref="home" >Home</a></li> -->
+            <li><a ui-sref="home" >Home</a></li>
             <li><a ui-sref="client-demographics">Client Demographics</a></li>
-            <li><a ui-sref="requests">Requests</a></li>
+            <!-- <li><a ui-sref="requests">Requests</a></li> -->
             <li><a ui-sref="responses">Responses</a></li>
             <li><a ui-sref="outcomes">Outcomes</a></li>
             <li><a ui-sref="results-over-time">Results Over Time</a></li>
@@ -55,6 +55,7 @@
       
     </div>
  
+    <!-- Move this to a pages/outcomes.html file, then add routing and controller -->
     <div ng-controller="outcomeController as outcome">
     <div id="selector-container">
       <!-- Dropdown for dates -->
@@ -91,7 +92,6 @@
       </div>
         
 
-        <!-- Move this to a pages/outcomes.html file, then add routing and controller -->
       <h2>Outcome of Requests for Shelter</h2>
        <h3>by {{outcome.demogFilter.demogSelect}}</h3>
 

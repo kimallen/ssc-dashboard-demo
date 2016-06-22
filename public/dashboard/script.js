@@ -1,9 +1,54 @@
 (function(){
 
 	angular
-        .module('dashboard', ['highcharts-ng', 'daterangepicker'])
-        .controller("outcomeController", ['$http', outcomeController]);
+        .module('dashboard', ['highcharts-ng', 'daterangepicker', 'ui.router'])
+        .controller("outcomeController", ['$http', outcomeController])
+        .controller("responseController", ['$http', responseController ])
+        .controller("clientDemogController", ['$http', clientDemogController ])
+        .controller("resultsOverTimeController", ['$http', resultsOverTimeController ])
+        .config("config", ['$stateProvider', '$urlRouterProvider', config])
     
+    function config($stateProvider, $urlRouterProvider){
+        $urlRouterProvider.otherwise("/client-demographics");
+
+        // States
+        $stateProvider
+            .state('client-demographics', {
+                url: "/client-demographics",
+                templateUrl: "pages/client-demographics.html",
+                controller: clientDemogController
+                })
+            .state('responses', {
+                url: "/responses",
+                templateUrl: "pages/responses.html",
+                controller: responseController
+                })
+            .state('outcomes', {
+                url: "/outcomes",
+                templateUrl: "pages/outcomes.html",
+                controller: outcomeController,
+                controllerAs: 'outcome'
+                })
+            .state('results-over-time', {
+                url: "/results-over-time",
+                templateUrl: "pages/results-over-time.html",
+                // controller: resultsOverTimeController
+                })
+    }
+
+    function responseController($http){
+
+    };
+
+    function clientDemogController($http){
+
+    };
+
+    
+    // function resultsOverTimeController($http){
+
+    // };
+
     function outcomeController($http){
         
         var vm = this
