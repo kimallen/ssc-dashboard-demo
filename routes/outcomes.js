@@ -6,8 +6,32 @@ var db = mongoose.connect('mongodb://localhost/test2')
 
 	// schema
 var TestCollectionSchema = new db.Schema({
-	data: String
+	data: String,
+
 })
+
+var requestSchema = db.Schema({
+	group: String,
+	dateCreated: Date,
+	assessments: [{age: String, 
+								 substance: String,
+								 english: String,
+								 immigration: String,
+								 history: Array,
+								 mental: Array,
+								 disability: Array,
+								 children: String,
+								 gender: Array,
+								 trafficking: Array,
+								 governmentId: Array,
+								 languages: String,
+							 }], // can alternately be referencing a Need object: need.assessments
+	response: Array, //[{yes: Number, no: Number, noResponse: Number }] or alternately referencing a Response object: response.response
+	timeToResponse: Number,
+	timeToYes: Number,
+	outcome: String // options: placed, infoGiven, noPlacement, other
+});
+
 
 db.model('TestCollection', TestCollectionSchema, 'testcollection')
 
