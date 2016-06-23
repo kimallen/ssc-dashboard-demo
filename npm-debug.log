@@ -9,7 +9,7 @@
 6 silly lifecycle myapp@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle myapp@0.0.0~start: myapp@0.0.0
 8 verbose lifecycle myapp@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle myapp@0.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/kallen/Dropbox/caravan/Safe Shelter/ssc-dashboard-prototype/node_modules/.bin:/usr/local/Cellar/node/5.9.0/bin:~/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/local/sbin:~/bin:/Users/kallen/.rbenv/bin:/Users/kallen/.rbenv/shims:/Users/kallen/.rvm/gems/ruby-2.0.0-p643/bin:/Users/kallen/.rvm/gems/ruby-2.0.0-p643@global/bin:/Users/kallen/.rvm/rubies/ruby-2.0.0-p643/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kallen/.rvm/bin:/Users/kallen/.rvm/bin
+9 verbose lifecycle myapp@0.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/kallen/Dropbox/caravan/Safe Shelter/ssc-dashboard-prototype/node_modules/.bin:/usr/local/Cellar/node/5.9.0/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/local/sbin:~/bin:/Users/kallen/.rbenv/bin:/Users/kallen/.rbenv/shims:/Users/kallen/.rvm/gems/ruby-2.0.0-p643/bin:/Users/kallen/.rvm/gems/ruby-2.0.0-p643@global/bin:/Users/kallen/.rvm/rubies/ruby-2.0.0-p643/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kallen/.rvm/bin:/Users/kallen/.rvm/bin
 10 verbose lifecycle myapp@0.0.0~start: CWD: /Users/kallen/Dropbox/caravan/Safe Shelter/ssc-dashboard-prototype
 11 silly lifecycle myapp@0.0.0~start: Args: [ '-c', 'node ./bin/www' ]
 12 silly lifecycle myapp@0.0.0~start: Returned: code: 1  signal: null
