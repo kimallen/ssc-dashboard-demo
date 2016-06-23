@@ -1,14 +1,41 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
+	// connecting to db
+var db = mongoose.connect('mongodb://localhost/test2')
 
+	// schema
+var TestCollectionSchema = new db.Schema({
+	data: String
+})
+
+db.model('TestCollection', TestCollectionSchema, 'testcollection')
+
+var TestCollection = db.model('TestCollection')
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 	// get some data here
+
+/*
+	TestCollection.find({}, function(err, testcollectionRecords) {
+      if (err) {
+          console.log("error" + err);
+      }
+      else {
+          console.log("result = " + JSON.stringify(testcollectionRecords));
+          res.send(JSON.stringify(testcollectionRecords));
+      }
+  });
+*/
+
 	var outcomesData = getOutcomesData();
   res.send(JSON.stringify(outcomesData));
 });
 
 function getOutcomesData(startDate, endDate, region) {
+
+
+
 // code for querying MongoDB
 	// if (region === "ALL"){
 	// 	region = {$exists: true}

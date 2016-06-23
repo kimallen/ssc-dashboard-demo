@@ -16,12 +16,14 @@
             .state('client-demographics', {
                 url: "/client-demographics",
                 templateUrl: "pages/client-demographics.html",
-                controller: clientDemogController
+                controller: clientDemogController,
+                controllerAs: 'clientDemog'
                 })
             .state('responses', {
                 url: "/responses",
                 templateUrl: "pages/responses.html",
-                controller: responseController
+                controller: responseController,
+                controllerAs: 'response'
                 })
             .state('outcomes', {
                 url: "/outcomes",
@@ -32,7 +34,8 @@
             .state('results-over-time', {
                 url: "/results-over-time",
                 templateUrl: "pages/results-over-time.html",
-                // controller: resultsOverTimeController
+                controller: resultsOverTimeController,
+                controllerAs: 'results'
                 })
     }
 
@@ -44,7 +47,7 @@
 
     };
 
-    
+
     // function resultsOverTimeController($http){
 
     // };
@@ -76,7 +79,8 @@
             regionOptions: [
                 {value: "ALL", name: "ALL"},
                 {value: "NJ", name: "New Jersey"},
-                {value: "Bay Area", name: "SF Bay Area"}
+                {value: "Bay Area", name: "SF Bay Area"},
+                {value: "Texax", name: "Texas"}
             ]
         }
         vm.datePicker = {}
@@ -165,11 +169,7 @@
                 var outcomes = subDemographics[subDemographic]
                 var chartConfig = getChartConfig(subDemographic, outcomes, colors)
                 // shows legend only for the last chart
-                count++
-                if (count === subDemCount){
-                    chartConfig.options.legend.enabled = true
-                }
-                else {chartConfig.options.legend.enabled = false};
+                
 
                 vm.chartConfigs.push(chartConfig);
             } //closes FOR loop
