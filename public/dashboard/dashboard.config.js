@@ -8,15 +8,21 @@ function config($stateProvider, $urlRouterProvider){
 
         // States
         $stateProvider
+            .state('home', {
+                url: '',
+                templateUrl: "home/home.html",
+                controller: "homeController",
+                controllerAs: "home"
+            })
             .state('client-demographics', {
                 url: "/client-demographics",
-                templateUrl: "pages/client-demographics.html",
+                templateUrl: "clients/client-demographics.html",
                 controller: "clientDemogController",
                 controllerAs: 'clientDemog'
                 })
             .state('responses', {
                 url: "/responses",
-                templateUrl: "pages/responses.html",
+                templateUrl: "responses/responses.html",
                 controller: "responseController",
                 controllerAs: 'response'
                 })
@@ -29,7 +35,7 @@ function config($stateProvider, $urlRouterProvider){
             
             .state('results-over-time', {
                 url: "/results-over-time",
-                templateUrl: "pages/results-over-time.html",
+                templateUrl: "results/results-over-time.html",
                 controller: "resultsOverTimeController",
                 controllerAs: 'results'
                 })

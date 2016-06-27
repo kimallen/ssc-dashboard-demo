@@ -1,9 +1,7 @@
 
-    console.log("in outcome.controller.js")
 angular
         .module('dashboard')
         .controller("outcomeController", ['$http', outcomeController])
-
 
 function outcomeController($http){
         console.log("in outcomeController")

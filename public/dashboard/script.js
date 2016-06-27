@@ -2,7 +2,7 @@
 
 	// angular
  //        .module('dashboard', ['highcharts-ng', 'daterangepicker', 'ui.router'])
- // angular.module('dashboard')
+ // cd angular.module('dashboard')
         // .controller("outcomeController", ['$http', outcomeController])
         // .controller("responseController", ['$http', responseController ])
         // .controller("clientDemogController", ['$http', clientDemogController ])

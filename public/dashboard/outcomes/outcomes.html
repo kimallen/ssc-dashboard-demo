@@ -1,4 +1,62 @@
 <div ng-controller="outcomeController as outcome">
 	
-	<p>here is my outcome controller!</p>
+	<div ng-controller="outcomeController as outcome">
+    <div id="selector-container">
+      <!-- Dropdown for dates -->
+        <div id= "date-selector" class="selector">
+          <label>Date:</label>
+          
+          <div date-range-picker class="form-control date-picker" type="text" ng-model="outcome.datePicker.date" ng-change="outcome.datePicker.date" options= "outcome.datePickerOptions"/>
+            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i><span></span><b class="caret"></b>
+          </div>
+          <!-- {{outcome.datePicker.date}} -->
+        </div>
+      
+      <!-- Dropdown for Regions -->
+        <div id="region-selector" class="selector">
+          <form name="regionSelect">
+            <label for = "regionSelect">Region: </label><br>
+            <select class="form-control" name="demogSelect" ng-model="outcome.regionFilter.regionSelect" ng-change="getDatesRegion">
+              <option ng-repeat="option in outcome.regionFilter.regionOptions" value="{{option.value}}">
+              {{option.name}}
+              </option>
+            </select>
+          </form>
+        </div> 
+        <!-- Dropdown for Demographic Filters -->
+        <div id="demog-selector" class="selector">
+          <form name="demogFilters">
+            <label for="demogSelect"> Demographic Filter: </label><br>
+            <select class="form-control" name="demogSelect" ng-model="outcome.demogFilter.demogSelect" ng-change = "outcome.populateCharts(outcome.demogFilter.demogSelect)">
+              <option ng-repeat="option in outcome.demogFilter.demogOptions" value="{{option.value}}">{{option.name}}
+              </option>
+            </select>
+          </form>
+        </div>
+      </div>
+        
+
+      <h2>Outcome of Requests for Shelter</h2>
+       <h3>by {{outcome.demogFilter.demogSelect}}</h3>
+
+        <p>Note: Individual participants can be represented in more than one graph. </p><p>(Ex. The outcome of an individual with a history of current suicidal ideation and a history of aggression will be a number in each of those graphs)</p>
+     
+      <div class="charts-block">
+        
+        <div class="legend">
+          <div ng-repeat="item in outcome.legendAttr">
+            <div class="legend-item" ng-style="{'background-color': item.color}">
+            </div>
+            {{item.label}}
+          </div>
+        </div>
+        
+        <!-- small multiples charts -->
+        <div id="charts">
+          <div ng-repeat="chartConfig in outcome.chartConfigs" class="small-multiples">
+              <highchart class="small-single" id="{{chartConfig.id}}" config="chartConfig"></highchart>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
