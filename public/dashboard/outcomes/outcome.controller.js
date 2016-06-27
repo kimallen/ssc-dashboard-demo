@@ -1,4 +1,4 @@
-(function(){
+
     console.log("in outcome.controller.js")
 angular
         .module('dashboard')
@@ -243,4 +243,3 @@ function outcomeController($http){
             };//closes getChartConfig                            
         }; //closes populateCharts
     }; //closes outcomeController	
-})();

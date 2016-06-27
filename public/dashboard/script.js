@@ -2,43 +2,43 @@
 
 	// angular
  //        .module('dashboard', ['highcharts-ng', 'daterangepicker', 'ui.router'])
- angular.module('dashboard')
-        .controller("outcomeController", ['$http', outcomeController])
-        .controller("responseController", ['$http', responseController ])
-        .controller("clientDemogController", ['$http', clientDemogController ])
-        .controller("resultsOverTimeController", ['$http', resultsOverTimeController ])
-        .config( ['$stateProvider', '$urlRouterProvider', config] )
+ // angular.module('dashboard')
+        // .controller("outcomeController", ['$http', outcomeController])
+        // .controller("responseController", ['$http', responseController ])
+        // .controller("clientDemogController", ['$http', clientDemogController ])
+        // .controller("resultsOverTimeController", ['$http', resultsOverTimeController ])
+        // .config( ['$stateProvider', '$urlRouterProvider', config] )
     
-    function config($stateProvider, $urlRouterProvider){
-        //$urlRouterProvider.otherwise("/client-demographics");
-
-        // States
-        $stateProvider
-            .state('client-demographics', {
-                url: "/client-demographics",
-                templateUrl: "pages/client-demographics.html",
-                controller: clientDemogController,
-                controllerAs: 'clientDemog'
-                })
-            .state('responses', {
-                url: "/responses",
-                templateUrl: "pages/responses.html",
-                controller: responseController,
-                controllerAs: 'response'
-                })
-            .state('outcomes', {
-                url: "/outcomes",
-                templateUrl: "pages/outcomes.html",
-                controller: outcomeController,
-                controllerAs: 'outcome'
-                })
+    // function config($stateProvider, $urlRouterProvider){
+    //     //$urlRouterProvider.otherwise("/client-demographics");
+    //     console.log("in config function")
+    //     // States
+    //     $stateProvider
+    //         .state('client-demographics', {
+    //             url: "/client-demographics",
+    //             templateUrl: "pages/client-demographics.html",
+    //             controller: "clientDemogController",
+    //             controllerAs: 'clientDemog'
+    //             })
+    //         .state('responses', {
+    //             url: "/responses",
+    //             templateUrl: "pages/responses.html",
+    //             controller: "responseController",
+    //             controllerAs: 'response'
+    //             })
+    //         .state('outcomes', {
+    //             url: "/outcomes",
+    //             templateUrl: "pages/outcomes.html",
+    //             controller: "outcomeController",
+    //             controllerAs: 'outcome'
+    //             })
             
-            .state('results-over-time', {
-                url: "/results-over-time",
-                templateUrl: "pages/results-over-time.html",
-                controller: resultsOverTimeController,
-                controllerAs: 'results'
-                })
+    //         .state('results-over-time', {
+    //             url: "/results-over-time",
+    //             templateUrl: "pages/results-over-time.html",
+    //             controller: "resultsOverTimeController",
+    //             controllerAs: 'results'
+    //             })
 
     }
 
