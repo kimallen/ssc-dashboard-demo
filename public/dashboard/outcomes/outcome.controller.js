@@ -31,7 +31,7 @@ function outcomeController($http){
                 {value: "ALL", name: "ALL"},
                 {value: "NJ", name: "New Jersey"},
                 {value: "Bay Area", name: "SF Bay Area"},
-                {value: "Texax", name: "Texas"}
+                {value: "Texas", name: "Texas"}
             ]
         }
         vm.datePicker = {}

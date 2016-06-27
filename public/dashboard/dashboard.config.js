@@ -4,12 +4,12 @@ angular
         .config( ['$stateProvider', '$urlRouterProvider', config] )
 
 function config($stateProvider, $urlRouterProvider){
-        //$urlRouterProvider.otherwise("/client-demographics");
+        $urlRouterProvider.otherwise("/home");
 
         // States
         $stateProvider
             .state('home', {
-                url: '',
+                url: '/home',
                 templateUrl: "home/home.html",
                 controller: "homeController",
                 controllerAs: "home"

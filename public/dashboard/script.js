@@ -1,4 +1,4 @@
-(function(){
+// (function(){
 
 	// angular
  //        .module('dashboard', ['highcharts-ng', 'daterangepicker', 'ui.router'])
@@ -42,16 +42,16 @@
 
     }
 
-    function responseController($http){
+    // function responseController($http){
 
     };
 
-    function clientDemogController($http){
+    // function clientDemogController($http){
 
     };
 
 
-    function resultsOverTimeController($http){
+    // function resultsOverTimeController($http){
 
     };
 
@@ -293,4 +293,4 @@
     //         };//closes getChartConfig                            
     //     }; //closes populateCharts
     // }; //closes outcomeController	
-})();//closes document ready
+// })();//closes document ready

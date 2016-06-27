@@ -1,3 +1,46 @@
+/*
+text colors */
+/*blue: #7CABC7*/
+/*black: #020609*/
+/*title blue: #62AEE0*/
+/*star blue: #5186A5*/
+/*background blue: #98BBCE*/
+/*button blue: #26709D*/
+/*button and title light blue: #67ABD2*/
+/*logo blue: #70B4DB*/
+h1, h3, h4, h5{
+	color: #298cda;
+}
+
+h2 {
+	color: #70B4DB;
+}
+
+.navbar-default {
+	background-color:#26709D;
+}
+.navbar-default .navbar-nav>li>a  {
+	color: white ;
+}
+
+a:link {
+    color: purple;
+}
+
+a:visited {
+    color: purple;
+}
+
+a:hover {
+    color: darkblue;
+    text-decoration: none;
+}
+
+a:active {
+    color: darkblue;
+}
+
+
 .legend-item {
 	width: 1em;
 	height: 1em;
