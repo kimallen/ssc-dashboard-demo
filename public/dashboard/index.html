@@ -21,107 +21,51 @@
     <meta name="viewport" content= "width=device-width, inital-scale=1.0">
 
   </head>
+  
   <body>
     <div class="container">
-    <h1>Safe Shelters Dashboard</h1>
+      <h1>Safe Shelters Dashboard</h1>
     
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <!-- <a class="navbar-brand" href="#">WebSiteName</a> -->
-          <!-- Creates collapsed menu on small screen -->
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
+      <!-- NAVBAR -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <!-- <a class="navbar-brand" href="#">WebSiteName</a> -->
+            <!-- Creates collapsed menu on small screen -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
 
-        <div class="collapse navbar-collapse" id="menu">
-          <ul class="nav navbar-nav nav-tabs">
-            <li><a ui-sref="home" >Home</a></li>
-            <li><a ui-sref="client-demographics">Client Demographics</a></li>
-            <!-- <li><a ui-sref="requests">Requests</a></li> -->
-            <li><a ui-sref="responses">Responses</a></li>
-            <li><a ui-sref="outcomes">Outcomes</a></li>
-            <li><a ui-sref="results-over-time">Results Over Time</a></li>
-          </ul>
+          <div class="collapse navbar-collapse" id="menu">
+            <ul class="nav navbar-nav nav-tabs">
+              <li><a ui-sref="home" >Home</a></li>
+              <li><a ui-sref="client-demographics">Client Demographics</a></li>
+              <!-- <li><a ui-sref="requests">Requests</a></li> -->
+              <li><a ui-sref="responses">Responses</a></li>
+              <li><a ui-sref="outcomes">Outcomes</a></li>
+              <li><a ui-sref="results-over-time">Results Over Time</a></li>
+            </ul>
+          </div>
         </div>
-      </div>
+    
     </nav>
 
     <div ui-view>
       
     </div>
- 
-    <!-- Move this to a pages/outcomes.html file, then add routing and controller -->
-    <div ng-controller="outcomeController as outcome">
-    <div id="selector-container">
-      <!-- Dropdown for dates -->
-        <div id= "date-selector" class="selector">
-          <label>Date:</label>
-          
-          <div date-range-picker class="form-control date-picker" type="text" ng-model="outcome.datePicker.date" ng-change="outcome.datePicker.date" options= "outcome.datePickerOptions"/>
-            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i><span></span><b class="caret"></b>
-          </div>
-          <!-- {{outcome.datePicker.date}} -->
-        </div>
-      
-      <!-- Dropdown for Regions -->
-        <div id="region-selector" class="selector">
-          <form name="regionSelect">
-            <label for = "regionSelect">Region: </label><br>
-            <select class="form-control" name="demogSelect" ng-model="outcome.regionFilter.regionSelect" ng-change="getDatesRegion">
-              <option ng-repeat="option in outcome.regionFilter.regionOptions" value="{{option.value}}">
-              {{option.name}}
-              </option>
-            </select>
-          </form>
-        </div> 
-        <!-- Dropdown for Demographic Filters -->
-        <div id="demog-selector" class="selector">
-          <form name="demogFilters">
-            <label for="demogSelect"> Demographic Filter: </label><br>
-            <select class="form-control" name="demogSelect" ng-model="outcome.demogFilter.demogSelect" ng-change = "outcome.populateCharts(outcome.demogFilter.demogSelect)">
-              <option ng-repeat="option in outcome.demogFilter.demogOptions" value="{{option.value}}">{{option.name}}
-              </option>
-            </select>
-          </form>
-        </div>
-      </div>
-        
+  
 
-      <h2>Outcome of Requests for Shelter</h2>
-       <h3>by {{outcome.demogFilter.demogSelect}}</h3>
-
-        <p>Note: Individual participants can be represented in more than one graph. </p><p>(Ex. The outcome of an individual with a history of current suicidal ideation and a history of aggression will be a number in each of those graphs)</p>
-     
-      <div class="charts-block">
-        
-        <div class="legend">
-          <div ng-repeat="item in outcome.legendAttr">
-            <div class="legend-item" ng-style="{'background-color': item.color}">
-            </div>
-            {{item.label}}
-          </div>
-        </div>
-        
-        <!-- small multiples charts -->
-        <div id="charts">
-          <div ng-repeat="chartConfig in outcome.chartConfigs" class="small-multiples">
-              <highchart class="small-single" id="{{chartConfig.id}}" config="chartConfig"></highchart>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    </div>
+    
+  </div>
 
     <script src="dashboard.module.js"></script>
-    <script src="script.js"></script>
     <script src="outcomes/outcome.controller.js"></script>
+    <script src="dashboard.config.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
 

@@ -1,16 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-	// connecting to db
-var db = mongoose.connect('mongodb://localhost/test2')
 
-	// schema
-var TestCollectionSchema = new db.Schema({
-	data: String,
+// connecting to db
+var db = mongoose.connect('mongodb://localhost/ssc-fakedata')
 
-})
-
-var requestSchema = db.Schema({
+// schema
+var requestSchema = new db.Schema({
 	group: String,
 	dateCreated: Date,
 	assessments: [{age: String, 
@@ -28,50 +24,51 @@ var requestSchema = db.Schema({
 							 }], // can alternately be referencing a Need object: need.assessments
 	response: Array, //[{yes: Number, no: Number, noResponse: Number }] or alternately referencing a Response object: response.response
 	timeToResponse: Number,
-	timeToYes: Number,
+	timeToMaybe: Number,
 	outcome: String // options: placed, infoGiven, noPlacement, other
 });
 
+// db.model('Request', requestSchema, 'request')
+// var Request = db.model('Request');
 
-db.model('TestCollection', TestCollectionSchema, 'testcollection')
+// router.get('/', function(req, res, next) {
 
-var TestCollection = db.model('TestCollection')
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-	// get some data here
+// 	Request.find({}, function(err, requests) {
+//       if (err) {
+//           console.log("error" + err);
+//       }
+//       else {
+//           console.log("result = " + JSON.stringify(requests));
+//           res.send(JSON.stringify(requests));
+//       }
+//   });
+// })
 
-/*
-	TestCollection.find({}, function(err, testcollectionRecords) {
-      if (err) {
-          console.log("error" + err);
-      }
-      else {
-          console.log("result = " + JSON.stringify(testcollectionRecords));
-          res.send(JSON.stringify(testcollectionRecords));
-      }
-  });
-*/
+// Get the records within a certain date range from a requested region (or ALL). $match
+// var selectedRequests = request.aggregate([
+// 			{
+// 				$match: {$and: 
+// 					[
+// 						{createdAt: {$gte: startDate, $lte: endDate}},
+// 						{region: region}
+// 					]
+// 				}
+// 			},
+// // for each demographic filter, count the result of each type of outcome
+// 			{ 
+// 				$group: { "_id": id, "ALL": {}}
+// 			}
+// 	],
+
+// 		);
+
 
 	var outcomesData = getOutcomesData();
   res.send(JSON.stringify(outcomesData));
-});
+
 
 function getOutcomesData(startDate, endDate, region) {
 
-
-
-// code for querying MongoDB
-	// if (region === "ALL"){
-	// 	region = {$exists: true}
-	// }
-	
-	// var selectedData = db.outcomes.find({
-	// 	"created-at": {$gte: startDate},
-	// 	 "created-at": {$lte: endDate},
-	// 	  "region": region
-	// 	});
-	
-	// return selectedData;
 
 	var data = { 
 	  "ALL":
@@ -163,10 +160,13 @@ function getOutcomesData(startDate, endDate, region) {
 	  "genderId": {},
 	  "traffickingType": {},
 	  "children": {},
-	  "disability": {}
+	  "disability": {},
+	  "governmentId": {}
 	};
 
 	return data;
 }
 
 module.exports = router;
+
+ // db.request.insert({"group": "New Jersey", "dateCreated": Date.now(), "assessments":[{"age": "under 18, legally emancipated", "english": "limited", "immigration": "Foreign National", "history":["History of violent behavior", "History of aggression"], "mental":["None Disclosed"], "disability": ["None"], "children": ["None"], "gender": ["male", "transgender male"], "trafficking": ["Sex Trafficking", "Sexual Assault"], "governmentId": ["Social security card"], "languages": "Spanish, English, Mayan"}], "response":[{"Maybe": 3, "No": 6, "No Response": 4}], "timeToResponse": 3, "timeToResponse": 4, "outcome": "Placement"})
