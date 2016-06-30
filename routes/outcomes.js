@@ -8,19 +8,19 @@ var db = mongoose.connect('mongodb://localhost/ssc-fakedata')
 // schema
 var requestSchema = new db.Schema({
 	group: String,
-	dateCreated: Date,
+	requestDate: Date,
 	assessments: [{age: String, 
-								 substance: String,
+								 substanceAbuse: String,
 								 english: String,
-								 immigration: String,
-								 history: Array,
-								 mental: Array,
-								 disability: Array,
+								 immigrationStatus: String,
+								 historyOfViolence: Array,
+								 mentalIllness: Array,
+								 disabilities: Array,
 								 children: String,
-								 gender: Array,
-								 trafficking: Array,
+								 genderId: Array,
+								 traffickingType: Array,
 								 governmentId: Array,
-								 languages: String,
+								 languages: [{primary: String, secondary: String}]
 							 }], // can alternately be referencing a Need object: need.assessments
 	response: Array, //[{yes: Number, no: Number, noResponse: Number }] or alternately referencing a Response object: response.response
 	timeToResponse: Number,
@@ -44,30 +44,81 @@ var requestSchema = new db.Schema({
 //   });
 // })
 
-// Get the records within a certain date range from a requested region (or ALL). $match
-// var selectedRequests = request.aggregate([
-// 			{
-// 				$match: {$and: 
-// 					[
-// 						{createdAt: {$gte: startDate, $lte: endDate}},
-// 						{region: region}
-// 					]
-// 				}
-// 			},
-// // for each demographic filter, count the result of each type of outcome
-// 			{ 
-// 				$group: { "_id": id, "ALL": {}}
-// 			}
-// 	],
 
-// 		);
 
+superSelectedRequests.aggregate([
+		{
+			$match: {
+				assessments.age: "Under 18, legally emanicipated" 
+				},
+			$group: {
+				"_id": outcome, "num_outcome": {$sum: 1}
+				}
+		}
+	])
+	// yields {"_id" : outcome, num_outcome: }
+// });
+
+router.get('/', function(req, res, next) {
 
 	var outcomesData = getOutcomesData();
   res.send(JSON.stringify(outcomesData));
 
+});
 
 function getOutcomesData(startDate, endDate, region) {
+var selectedRequestsByDateRegion = db.request.aggregate([
+				{ 
+					$match: {$and: 
+						[
+							{requestDate: {$gte: 1432323613613, $lte: Date.now()}},
+							{region: "SF Bay Area"}
+						]
+					}
+				}
+			]);
+//Test:
+db.request.aggregate([{$group: {_id: 'outcome', count: {$sum: 1}}}]);
+//returns { "_id" : "outcome", "count" : 8 }
+	// Get the records within a certain date range from a requested region (or ALL). $match
+	var selectedRequestsByDateRegion = db.requests.aggregate([
+				{ // get all the documents that fall under these dates and region parameters
+					$match: {$and: 
+						[
+							{requestDate: {$gte: startDate, $lte: endDate}},
+							{region: region}
+						]
+					},
+					// use $project to select the fields we need: assessments, outcome
+					$project: {
+										_id: 0,
+										outcome: 1,
+										age: $assessments.age
+										},
+					//returns assessment and outcome data 
+
+					// http://stackoverflow.com/questions/16772156/nested-grouping-with-mongodb
+					$group: {_id: 
+											{age:'$age', outcome: '$outcome'}
+									},
+					$group: {_id: "$_id.age"},
+										outcomes: 
+									}
+
+					// return each age group and the outcome
+				}
+			]);
+
+// Count the result of each type of outcome
+	var superSelectedRequests = selectedRequestsByDateRegion.aggregate([
+			{ 
+					$group: { 
+						"_id": outcome, num_outcome: {$sum: 1}
+					}
+
+				}
+
+		]);
 
 
 	var data = { 
@@ -155,7 +206,7 @@ function getOutcomesData(startDate, endDate, region) {
 	    },
 	  "english": {},
 	  "mental": {},
-	  "substanceAbuse": {},
+	  "substanceAbuseAbuse": {},
 	  "immigrationStatus": {},
 	  "genderId": {},
 	  "traffickingType": {},
@@ -169,4 +220,4 @@ function getOutcomesData(startDate, endDate, region) {
 
 module.exports = router;
 
- // db.request.insert({"group": "New Jersey", "dateCreated": Date.now(), "assessments":[{"age": "under 18, legally emancipated", "english": "limited", "immigration": "Foreign National", "history":["History of violent behavior", "History of aggression"], "mental":["None Disclosed"], "disability": ["None"], "children": ["None"], "gender": ["male", "transgender male"], "trafficking": ["Sex Trafficking", "Sexual Assault"], "governmentId": ["Social security card"], "languages": "Spanish, English, Mayan"}], "response":[{"Maybe": 3, "No": 6, "No Response": 4}], "timeToResponse": 3, "timeToResponse": 4, "outcome": "Placement"})
+ 
