@@ -7,6 +7,8 @@ function outcomeController($http){
         console.log("in outcomeController")
         var vm = this
         vm.populateCharts = populateCharts
+        vm.submitFilters = submitFilters
+        vm.testFunction = testFunction
         vm.chartConfigs = [];
         vm.demogFilter = { 
             demogSelect: "ALL",
@@ -40,7 +42,6 @@ function outcomeController($http){
             endDate: moment()
         }
         vm.datePickerOptions = getDatePickerOptions()
-
         var datesRegion = {}
         var outcomesData = {};
 
@@ -51,6 +52,7 @@ function outcomeController($http){
         // defaultDataByDatesRegion()
         // var datePickerOptions = getDatePickerOptions()
         function getDatePickerOptions(){
+
             var datePickerOptions = {
                 'showDropdowns': true,
                 'ranges': {
@@ -68,27 +70,15 @@ function outcomeController($http){
             return datePickerOptions
         };
 
-        
         // // This function retrieves data from backend based on selected dates and ranges
-        function getDataByDatesRegion(opt = {}){
-            var apiUrlQuery = apiUrl
-            // var apiUrlQuery = apiUrl + "?dates=" + opt.dates + "&region=" + opt.region
-            $http.get(apiUrlQuery)
-            .catch
-            .then(storeResponseData)
+        function submitFilters(dateFilter, regionFilter){
+            console.log("in submitFilters function")
+            // var apiUrlQuery = apiUrl + '?' + "startDate="dateFilter.startDate + "&endDate=" dateFilter.startDate + "&region=" + regionFilter.region
+            
+            // $http.get(apiUrlQuery)
+            // .catch
+            // .then(storeResponseData) //immediately populates the charts
         };
-
-
-        function defaultDataByDatesRegion(){
-            getDataByDatesRegion(
-                {
-                dates:[
-                    "2016-06-06T21:19:44.867Z",
-                    "2016-06-12T21:19:44.867Z"
-                ], 
-                region: "ALL"
-            })
-        }
         
         
         function storeResponseData(response){
@@ -100,8 +90,9 @@ function outcomeController($http){
             populateCharts("ALL")
         }
 
-        //This uses data from api, takes in the filter type, and builds small multiples charts of each of the filter's categories
+        // This uses data from api, takes in the filter type, and builds small multiples charts of each of the filter's categories
         function populateCharts(filterType){
+
             vm.chartConfigs = [];
             var subDemographics = outcomesData[filterType]       
             var maxY = getMaxY() //maxY is used in getChartConfig to set Y axis
@@ -240,4 +231,7 @@ function outcomeController($http){
                                   
             };//closes getChartConfig                            
         }; //closes populateCharts
+        function testFunction(){
+            console.log("test Function")
+        }
     }; //closes outcomeController	

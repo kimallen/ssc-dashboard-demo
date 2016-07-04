@@ -1,21 +1,19 @@
 
 <div id="selector-container">
+  
   <!-- Dropdown for dates -->
     <div id= "date-selector" class="selector">
-      <label>Date </label>
-      
+      <label class="control-label">Date </label>
       <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-      <input date-range-picker class="form-control date-picker" type="text" ng-model="outcome.datePicker.date" ng-change="outcome.datePicker.date" options= "outcome.datePickerOptions"/>
-        <!-- <i class="glyphicon glyphicon-calendar fa fa-calendar"></i><span></span><b class="caret"></b> -->
-      </input>
-      <!-- {{outcome.datePicker.date}} -->
+      <b class="caret"></b>
+      <input date-range-picker id="report-range" class="form-control date-picker" type="text" ng-model="outcome.datePicker.date" ng-change="outcome.submitFilters(outcome.datePicker.date, outcome.regionFilter.regionSelect)" options= "outcome.datePickerOptions"/>
+      {{outcome.datePicker.date}}
     </div>
-  
   <!-- Dropdown for Regions -->
     <div id="region-selector" class="selector">
       <form name="regionSelect">
         <label for = "regionSelect">Region: </label><br>
-        <select class="form-control" name="demogSelect" ng-model="outcome.regionFilter.regionSelect" ng-change="getDatesRegion">
+        <select class="form-control" name="demogSelect" ng-model="outcome.regionFilter.regionSelect" ng-change="outcome.submitFilters(outcome.datePicker.date, outcome.regionFilter.regionSelect)">
           <option ng-repeat="option in outcome.regionFilter.regionOptions" value="{{option.value}}">
           {{option.name}}
           </option>
@@ -26,7 +24,7 @@
     <div id="demog-selector" class="selector">
       <form name="demogFilters">
         <label for="demogSelect"> Demographic Filter: </label><br>
-        <select class="form-control" name="demogSelect" ng-model="outcome.demogFilter.demogSelect" ng-change = "outcome.populateCharts(outcome.demogFilter.demogSelect)">
+        <select class="form-control" name="demogSelect" ng-model="outcome.demogFilter.demogSelect" >
           <option ng-repeat="option in outcome.demogFilter.demogOptions" value="{{option.value}}">{{option.name}}
           </option>
         </select>

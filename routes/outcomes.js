@@ -3,30 +3,30 @@ var router = express.Router();
 var mongoose = require('mongoose');
 
 // connecting to db
-var db = mongoose.connect('mongodb://localhost/ssc-fakedata')
+// var db = mongoose.connect('mongodb://localhost/ssc-fakedata')
 
 // schema
-var requestSchema = new db.Schema({
-	group: String,
-	requestDate: Date,
-	assessments: [{age: String, 
-								 substanceAbuse: String,
-								 english: String,
-								 immigrationStatus: String,
-								 historyOfViolence: Array,
-								 mentalIllness: Array,
-								 disabilities: Array,
-								 children: String,
-								 genderId: Array,
-								 traffickingType: Array,
-								 governmentId: Array,
-								 languages: [{primary: String, secondary: String}]
-							 }],
-	response: Array, //[{yes: Number, no: Number, noResponse: Number }] or alternately referencing a Response object: response.response
-	timeToResponse: Number,
-	timeToMaybe: Number,
-	outcome: String // options: placed, Info given, No Placement, other
-});
+// var requestSchema = new db.Schema({
+// 	group: String,
+// 	requestDate: Date,
+// 	assessments: [{age: String, 
+// 								 substanceAbuse: String,
+// 								 english: String,
+// 								 immigrationStatus: String,
+// 								 historyOfViolence: Array,
+// 								 mentalIllness: Array,
+// 								 disabilities: Array,
+// 								 children: String,
+// 								 genderId: Array,
+// 								 traffickingType: Array,
+// 								 governmentId: Array,
+// 								 languages: [{primary: String, secondary: String}]
+// 							 }],
+// 	response: Array, //[{yes: Number, no: Number, noResponse: Number }] or alternately referencing a Response object: response.response
+// 	timeToResponse: Number,
+// 	timeToMaybe: Number,
+// 	outcome: String // options: placed, Info given, No Placement, other
+// });
 
 // db.model('Request', requestSchema, 'request')
 // var Request = db.model('Request');
@@ -46,16 +46,16 @@ var requestSchema = new db.Schema({
 
 
 
-superSelectedRequests.aggregate([
-		{
-			$match: {
-				assessments.age: "Under 18, legally emanicipated" 
-				},
-			$group: {
-				"_id": outcome, "num_outcome": {$sum: 1}
-				}
-		}
-	])
+// superSelectedRequests.aggregate([
+// 		{
+// 			$match: {
+// 				assessments.age: "Under 18, legally emanicipated" 
+// 				},
+// 			$group: {
+// 				"_id": outcome, "num_outcome": {$sum: 1}
+// 				}
+// 		}
+// 	])
 	// yields {"_id" : outcome, num_outcome: }
 // });
 
@@ -67,16 +67,23 @@ router.get('/', function(req, res, next) {
 });
 
 function getOutcomesData(startDate, endDate, region) {
-var selectedRequestsByDateRegion = db.request.aggregate([
-				{ 
-					$match: {$and: 
-						[
-							{requestDate: {$gte: 1432323613613, $lt: 1440198557701}},
-							{group: "New Jersey"}
-						]
-					}
-				}
-			]);
+	var group = ""
+	if (region === "ALL"){
+		group = null
+	}
+	else{
+		group = region
+	}
+// var selectedRequestsByDateRegion = db.request.aggregate([
+// 				{ 
+// 					$match: {$and: 
+// 						[
+// 							{requestDate: {$gte: 1432323613613, $lt: 1440198557701}},
+// 							{group: region}
+// 						]
+// 					}
+// 				}
+// 			]);
 
 
 	var data = { 

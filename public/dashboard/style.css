@@ -40,7 +40,9 @@ a:active {
     color: darkblue;
 }
 
-
+#report-range{
+	width: 250px;
+}
 .legend-item {
 	width: 1em;
 	height: 1em;
