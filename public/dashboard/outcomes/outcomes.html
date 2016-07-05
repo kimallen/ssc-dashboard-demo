@@ -7,7 +7,7 @@
       <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
       <b class="caret"></b>
       <input date-range-picker id="report-range" class="form-control date-picker" type="text" ng-model="outcome.datePicker.date" ng-change="outcome.submitFilters(outcome.datePicker.date, outcome.regionFilter.regionSelect)" options= "outcome.datePickerOptions"/>
-      {{outcome.datePicker.date}}
+      <!-- {{outcome.datePicker.date}} -->
     </div>
   <!-- Dropdown for Regions -->
     <div id="region-selector" class="selector">
@@ -24,7 +24,7 @@
     <div id="demog-selector" class="selector">
       <form name="demogFilters">
         <label for="demogSelect"> Demographic Filter: </label><br>
-        <select class="form-control" name="demogSelect" ng-model="outcome.demogFilter.demogSelect" >
+        <select class="form-control" name="demogSelect" ng-model="outcome.demogFilter.demogSelect" ng-change="outcome.populateCharts(outcome.demogFilter.demogSelect)" >
           <option ng-repeat="option in outcome.demogFilter.demogOptions" value="{{option.value}}">{{option.name}}
           </option>
         </select>

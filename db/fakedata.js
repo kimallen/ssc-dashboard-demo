@@ -33,8 +33,14 @@ function randomize (demogOptions){
 	var randomIndex = Math.floor(Math.random() * (demogOptions.length));
 	return demogOptions[randomIndex]
 }
-
+function createMultipleRecords(number){
+	for (var i = 0; i < number; i++) {
+		createRecord()
+	}
+}
 //creates one document with randomized values
+function createRecord(){
+
 db.request.insert({group: randomize(groupOptns),
 	 requestDate: Math.floor(Math.random() * ((Date.now() - minDate)) + minDate), 
 	 assessments:
@@ -57,5 +63,5 @@ db.request.insert({group: randomize(groupOptns),
 		timeToMaybe: randomFirstMaybeNum, 
 		outcome: randomize(outcomeOptns)
 });
-
+}
 // db.request.insert({"group": "New Jersey", "requestDate": Date.now(), "assessments":[{"age": "under 18, legally emancipated", "english": "limited", "immigration": "Foreign National", "history":["History of violent behavior", "History of aggression"], "mental":["None Disclosed"], "disability": ["None"], "children": ["None"], "gender": ["male", "transgender male"], "trafficking": ["Sex Trafficking", "Sexual Assault"], "governmentId": ["Social security card"], "languages": {"primary": "Spanish", "secondary": "English"}}], "response":[{"Maybe": 3, "No": 6, "No Response": 4}], "timeToResponse": 3, "timeToMaybe": 4, "outcome": "Placement"})

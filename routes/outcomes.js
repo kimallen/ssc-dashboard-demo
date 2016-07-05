@@ -60,30 +60,44 @@ var mongoose = require('mongoose');
 // });
 
 router.get('/', function(req, res, next) {
-
+	console.log ('*****************************')
+	// console.log('req' + req.query.region)
+	// var query = {group: req.query.region}
+	// console.log ('query ' + regionQuery.region )
+	// var outcomesData = getOutcomesData(regionQuery);
 	var outcomesData = getOutcomesData();
   res.send(JSON.stringify(outcomesData));
 
 });
 
-function getOutcomesData(startDate, endDate, region) {
-	var group = ""
-	if (region === "ALL"){
-		group = null
-	}
-	else{
-		group = region
-	}
+var options = {}
+function getOutcomesData(options) {
+	// var place = ""
+	// if (region && region === "ALL"){
+	// 	place = null
+	// }
+	// else{
+	// 	place = region
+	// };
+
+	// var selectedRequestsByRegion = db.request.aggregate([
+	// 		{
+	// 			$match: {group: "New Jersey"}
+	// 		}
+	// 	]);
+	// console.log(selectedRequestsByRegion)
 // var selectedRequestsByDateRegion = db.request.aggregate([
 // 				{ 
 // 					$match: {$and: 
 // 						[
 // 							{requestDate: {$gte: 1432323613613, $lt: 1440198557701}},
-// 							{group: region}
+// 							{group: options.region}
 // 						]
 // 					}
 // 				}
 // 			]);
+
+// return selectedRequestsByRegion
 
 
 	var data = { 

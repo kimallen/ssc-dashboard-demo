@@ -4,7 +4,6 @@ angular
         .controller("outcomeController", ['$http', outcomeController])
 
 function outcomeController($http){
-        console.log("in outcomeController")
         var vm = this
         vm.populateCharts = populateCharts
         vm.submitFilters = submitFilters
@@ -31,8 +30,8 @@ function outcomeController($http){
             regionSelect: "ALL",
             regionOptions: [
                 {value: "ALL", name: "ALL"},
-                {value: "NJ", name: "New Jersey"},
-                {value: "Bay Area", name: "SF Bay Area"},
+                {value: "New Jersey", name: "New Jersey"},
+                {value: "SF Bay Area", name: "SF Bay Area"},
                 {value: "Texas", name: "Texas"}
             ]
         }
@@ -42,6 +41,7 @@ function outcomeController($http){
             endDate: moment()
         }
         vm.datePickerOptions = getDatePickerOptions()
+        
         var datesRegion = {}
         var outcomesData = {};
 
@@ -73,11 +73,13 @@ function outcomeController($http){
         // // This function retrieves data from backend based on selected dates and ranges
         function submitFilters(dateFilter, regionFilter){
             console.log("in submitFilters function")
+            console.log("startDate " + dateFilter.startDate + "endDate " + dateFilter.endDate)
+            console.log("region " + regionFilter)
             // var apiUrlQuery = apiUrl + '?' + "startDate="dateFilter.startDate + "&endDate=" dateFilter.startDate + "&region=" + regionFilter.region
+            var apiUrlQuery = apiUrl + "?region=" + regionFilter
             
-            // $http.get(apiUrlQuery)
-            // .catch
-            // .then(storeResponseData) //immediately populates the charts
+            $http.get(apiUrlQuery)
+            .then(storeResponseData) //immediately populates the charts
         };
         
         
