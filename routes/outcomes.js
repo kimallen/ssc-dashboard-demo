@@ -3,103 +3,94 @@ var router = express.Router();
 var mongoose = require('mongoose');
 
 // connecting to db
-// var db = mongoose.connect('mongodb://localhost/ssc-fakedata')
+var db = mongoose.connect('mongodb://localhost/ssc-fakedata')
 
 // schema
-// var requestSchema = new db.Schema({
-// 	group: String,
-// 	requestDate: Date,
-// 	assessments: [{age: String, 
-// 								 substanceAbuse: String,
-// 								 english: String,
-// 								 immigrationStatus: String,
-// 								 historyOfViolence: Array,
-// 								 mentalIllness: Array,
-// 								 disabilities: Array,
-// 								 children: String,
-// 								 genderId: Array,
-// 								 traffickingType: Array,
-// 								 governmentId: Array,
-// 								 languages: [{primary: String, secondary: String}]
-// 							 }],
-// 	response: Array, //[{yes: Number, no: Number, noResponse: Number }] or alternately referencing a Response object: response.response
-// 	timeToResponse: Number,
-// 	timeToMaybe: Number,
-// 	outcome: String // options: placed, Info given, No Placement, other
-// });
+var requestSchema = new db.Schema({
+	region: String,
+	requestDate: Date,
+	age: String, 
+  substanceAbuse: String,
+  english: String,
+  immigrationStatus: String,
+  mentalIllness: String,
+  historyOfViolence: Array,
+  disabilities: Array,
+  children: Array,
+  genderId: Array,
+  traffickingType: Array,
+  governmentId: Array,
+  languages: [{primary: String, secondary: String}],
+	response: Array, //[{maybe: Number, no: Number, noResponse: Number }] 
+	timeToResponse: Number,
+	timeToMaybe: Number,
+	outcome: String // options: placed, Info given, No Placement, other
+});
 
-// db.model('Request', requestSchema, 'request')
-// var Request = db.model('Request');
-
-// router.get('/', function(req, res, next) {
-
-// 	Request.find({}, function(err, requests) {
-//       if (err) {
-//           console.log("error" + err);
-//       }
-//       else {
-//           console.log("result = " + JSON.stringify(requests));
-//           res.send(JSON.stringify(requests));
-//       }
-//   });
-// })
-
-
-
-// superSelectedRequests.aggregate([
-// 		{
-// 			$match: {
-// 				assessments.age: "Under 18, legally emanicipated" 
-// 				},
-// 			$group: {
-// 				"_id": outcome, "num_outcome": {$sum: 1}
-// 				}
-// 		}
-// 	])
-	// yields {"_id" : outcome, num_outcome: }
-// });
+db.model('Request', requestSchema, 'request')
+var Request = db.model('Request');
 
 router.get('/', function(req, res, next) {
-	console.log ('*****************************')
-	// console.log('req' + req.query.region)
-	// var query = {group: req.query.region}
-	// console.log ('query ' + regionQuery.region )
-	// var outcomesData = getOutcomesData(regionQuery);
-	var outcomesData = getOutcomesData();
-  res.send(JSON.stringify(outcomesData));
+
+	// Request.find({}, 'region outcome', function(err, requests) {
+ //      if (err) {
+ //          console.log("error" + err);
+ //      }
+ //      else {       
+ //          res.send(JSON.stringify(requests));
+ //      }
+ //  });
+	
+	Request.aggregate([
+				{
+					$match: {region: "New Jersey"}
+				},
+				{
+					$group: {
+					"_id": "$outcome", "total": {$sum: 1}}
+				}
+			],
+			function (err, result) {
+				if (err) {
+					console.log("error " + err);
+				}
+				else {
+
+					res.send(JSON.stringify(result));
+				}
+			}
+		);
 
 });
 
+//USE BELOW FOR TESTING RECEIPT OF REGION AND DATE FILTERS
+// router.get('/', function(req, res, next) {
+// 	console.log ('*****************************')
+	
+// THIS WITH REGION SELECTION
+	// console.log('req: ' + req.query.region)
+	// var regionQuery = {region: req.query.region}
+	// console.log ('query: ' + regionQuery.region )
+	
+	// var outcomesData = getOutcomesData(regionQuery);
+	// res.send(JSON.stringify(outcomesData));
+	
+	// THIS WITHOUT REGION SELECTION
+	// var outcomesData = getOutcomesData();
+	// res.send(JSON.stringify(outcomesData));
+	
+	//WITH A PROMISE??
+	// var promise = outcomesData.exec();
+	// assert.ok(promise instanceof require ('mpromise'));
+	// promise.then(function(response){
+	//   res.send(JSON.stringify(response));
+	// });
+// });
+
 var options = {}
 function getOutcomesData(options) {
-	// var place = ""
-	// if (region && region === "ALL"){
-	// 	place = null
-	// }
-	// else{
-	// 	place = region
-	// };
-
-	// var selectedRequestsByRegion = db.request.aggregate([
-	// 		{
-	// 			$match: {group: "New Jersey"}
-	// 		}
-	// 	]);
-	// console.log(selectedRequestsByRegion)
-// var selectedRequestsByDateRegion = db.request.aggregate([
-// 				{ 
-// 					$match: {$and: 
-// 						[
-// 							{requestDate: {$gte: 1432323613613, $lt: 1440198557701}},
-// 							{group: options.region}
-// 						]
-// 					}
-// 				}
-// 			]);
-
-// return selectedRequestsByRegion
-
-
+		// use options.region to get the region
+		// use options.date to get the dates
 	var data = { 
 	  "ALL":
 	    {

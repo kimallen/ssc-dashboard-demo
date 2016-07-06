@@ -1,4 +1,4 @@
-var groupOptns = 
+var regionOptns = 
 					["New Jersey", "SF Bay Area", "Texas"];
 var ageOptns = 
 					["under 18, legally emanicipated", "under 18, not emancipated", "18-24", "25 and older"];
@@ -41,23 +41,21 @@ function createMultipleRecords(number){
 //creates one document with randomized values
 function createRecord(){
 
-db.request.insert({group: randomize(groupOptns),
+db.request.insert({region: randomize(regionOptns),
 	 requestDate: Math.floor(Math.random() * ((Date.now() - minDate)) + minDate), 
-	 assessments:
-			[{age: randomize(ageOptns), 
-			mentalIllness: randomize(mentalIllnessOptns), 
-			english: randomize(englishProficiencyOptns),
-			substanceAbuse: randomize(substanceOptns),
-			immigrationStatus: randomize(immigrationOptns),
-			
-			genderId: [randomize(genderIds)],
-			traffickingType: [randomize(traffickingOptns)],
-			children: [randomize(childrenOptns)],
-			historyOfViolence: [randomize(historyOptns)],
-			disabilities: [randomize(disabilityOptns)],
-			governmentId: [randomize(governmentIdOptns)],
-			languages: [{primary: "Some language", secondary: "Some other language"}]
-			}],
+		age: randomize(ageOptns), 
+		mentalIllness: randomize(mentalIllnessOptns), 
+		english: randomize(englishProficiencyOptns),
+		substanceAbuse: randomize(substanceOptns),
+		immigrationStatus: randomize(immigrationOptns),
+		
+		genderId: [randomize(genderIds)],
+		traffickingType: [randomize(traffickingOptns)],
+		children: [randomize(childrenOptns)],
+		historyOfViolence: [randomize(historyOptns)],
+		disabilities: [randomize(disabilityOptns)],
+		governmentId: [randomize(governmentIdOptns)],
+		languages: [{primary: "Some language", secondary: "Some other language"}],
 		response:[{"Maybe": randomResponseNum, "No": randomResponseNum, "No Response": randomResponseNum}], 
 		timeToResponse: randomFirstNum, 
 		timeToMaybe: randomFirstMaybeNum, 
