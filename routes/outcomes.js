@@ -20,7 +20,8 @@ var requestSchema = new db.Schema({
   genderId: Array,
   traffickingType: Array,
   governmentId: Array,
-  languages: [{primary: String, secondary: String}],
+  primaryLanguage: String,
+	secondaryLanguage: String,
 	response: Array, //[{maybe: Number, no: Number, noResponse: Number }] 
 	timeToResponse: Number,
 	timeToMaybe: Number,
@@ -31,7 +32,22 @@ db.model('Request', requestSchema, 'request')
 var Request = db.model('Request');
 
 router.get('/', function(req, res, next) {
+	  
+	  var startDate = new Date(1405631106357);
+	  console.log('start date = ' + startDate.toISOString());
+	  var endDate = new Date(2467843787242);
+	  console.log('end date = ' + endDate.toISOString());
+	  Request.find({requestDate:{$gte: startDate, $lte: endDate}}, {requestDate: 1, outcome: 1, region:1}, callback)
 
+		function callback(err, result) {
+				if (err) {
+					console.log("error " + err);
+				}
+				else {
+
+					res.send(JSON.stringify(result));
+				}
+			};
 	// Request.find({}, 'region outcome', function(err, requests) {
  //      if (err) {
  //          console.log("error" + err);
@@ -40,57 +56,47 @@ router.get('/', function(req, res, next) {
  //          res.send(JSON.stringify(requests));
  //      }
  //  });
-	
-	Request.aggregate([
-				{
-					$match: {region: "New Jersey"}
-				},
-				{
-					$group: {
-					"_id": "$outcome", "total": {$sum: 1}}
-				}
-			],
-			function (err, result) {
-				if (err) {
-					console.log("error " + err);
-				}
-				else {
 
-					res.send(JSON.stringify(result));
-				}
-			}
-		);
+//IN MONGODB
+// db.request.find({requestDate: {$gte: 1405631106357, $lte: 1467843787242}, region: "SF Bay Area"}, {requestDate: 1, outcome: 1, region:1}, callback)
 
+//IN MONGOOSE??
+// db.request.find({requestDate: {$gte: 1405631106357, $lte: 1467843787242}, region: "SF Bay Area"}, 'requestDate region outcome', callback)
 });
+
+
+	
+
 
 //USE BELOW FOR TESTING RECEIPT OF REGION AND DATE FILTERS
 // router.get('/', function(req, res, next) {
-// 	console.log ('*****************************')
+// // 	console.log ('*****************************')
 	
-// THIS WITH REGION SELECTION
-	// console.log('req: ' + req.query.region)
-	// var regionQuery = {region: req.query.region}
-	// console.log ('query: ' + regionQuery.region )
+// // THIS WITH REGION SELECTION
+// 	console.log('req: ' + req.query.region)
+// 	var regionQuery = {region: req.query.region}
+// 	console.log ('query: ' + regionQuery.region )
 	
-	// var outcomesData = getOutcomesData(regionQuery);
-	// res.send(JSON.stringify(outcomesData));
+// 	var outcomesData = getOutcomesData(regionQuery);
+// 	res.send(JSON.stringify(outcomesData));
 	
-	// THIS WITHOUT REGION SELECTION
-	// var outcomesData = getOutcomesData();
-	// res.send(JSON.stringify(outcomesData));
+// 	// THIS WITHOUT REGION SELECTION
+// 	// var outcomesData = getOutcomesData();
+// 	// res.send(JSON.stringify(outcomesData));
 	
-	//WITH A PROMISE??
-	// var promise = outcomesData.exec();
-	// assert.ok(promise instanceof require ('mpromise'));
-	// promise.then(function(response){
-	//   res.send(JSON.stringify(response));
-	// });
+// 	//WITH A PROMISE??
+// 	// var promise = outcomesData.exec();
+// 	// assert.ok(promise instanceof require ('mpromise'));
+// 	// promise.then(function(response){
+// 	//   res.send(JSON.stringify(response));
+// 	// });
 // });
 
-var options = {}
+// var options = {}
 function getOutcomesData(options) {
 		// use options.region to get the region
 		// use options.date to get the dates
+
 	var data = { 
 	  "ALL":
 	    {
@@ -185,7 +191,7 @@ function getOutcomesData(options) {
 	  "governmentId": {}
 	};
 
-	return data;
+	// return data;
 }
 
 module.exports = router;
