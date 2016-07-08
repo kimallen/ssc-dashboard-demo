@@ -57,8 +57,10 @@ router.get('/', function(req, res, next) {
 					var aggregatedResults;
 
 					// do the transformation logic here
-					aggregatedResults = result; // just return the same results for now
-					// aggregatedResults = {test:"test"}
+					aggregatedResults = 
+						for (var i = 0; i < result.length; i++) {
+							result[i]
+						}
 
 					return aggregatedResults;
 				}
