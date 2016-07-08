@@ -99,7 +99,7 @@ function buildSkeletonData(){
   return skeletonData
 }
 
-function countOutcomes(){
+function countOutcomes(result){
   var demogs = ["ALL",
     "age",
     "substanceAbuse",
@@ -117,8 +117,17 @@ function countOutcomes(){
   // for each document
     //take the value of outcome
     //and for each demographic in demogs ARRAY, add 1 to the corresponding outcome value
-    for (var i = 0; i < demogs.length; i++) {
+    for (var i = 0; i < result.length; i++) {
       
+      var outcome = result.outcome
+      for (var d = 1; d < demogs.length; d++) {
+        var demogValue = result[demogs[d]]
+        //if demogValue is not an array do this:
+          skeletonData.demogs[d].demogValue.outcome ++1
+          skeletonData["ALL"]["Overall Outcomes"].outcome ++ 1
+        //if demogValue is an array, do this:
+      }
+
     }
 
 }
