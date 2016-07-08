@@ -34,34 +34,41 @@ var Request = db.model('Request');
 router.get('/', function(req, res, next) {
 	  
 	  var startDate = new Date(1405631106357);
-	  console.log('start date = ' + startDate.toISOString());
 	  var endDate = new Date(2467843787242);
-	  console.log('end date = ' + endDate.toISOString());
-	  Request.find({requestDate:{$gte: startDate, $lte: endDate}}, {requestDate: 1, outcome: 1, region:1}, callback)
-
-		function callback(err, result) {
+ 
+	  // Request.find({requestDate:{$gte: startDate, $lte: endDate}, region: "New Jersey"}, {requestDate: 1, outcome: 1, region:1}, callback)
+	
+	var regionQuery = {region: req.query.region}
+	console.log ('*****************************')
+	console.log("regionQuery = " + regionQuery.region)
+	
+			Request.find({region: regionQuery.region}, callback)
+		
+			function callback(err, result) {
 				if (err) {
 					console.log("error " + err);
 				}
 				else {
+					aggregatedResults = aggregateResults(result); 
+					res.send(JSON.stringify(aggregatedResults));
+				}
 
-					res.send(JSON.stringify(result));
+				function aggregateResults(result) {
+					var aggregatedResults;
+
+					// do the transformation logic here
+					aggregatedResults = result; // just return the same results for now
+					// aggregatedResults = {test:"test"}
+
+					return aggregatedResults;
 				}
 			};
-	// Request.find({}, 'region outcome', function(err, requests) {
- //      if (err) {
- //          console.log("error" + err);
- //      }
- //      else {       
- //          res.send(JSON.stringify(requests));
- //      }
- //  });
 
-//IN MONGODB
-// db.request.find({requestDate: {$gte: 1405631106357, $lte: 1467843787242}, region: "SF Bay Area"}, {requestDate: 1, outcome: 1, region:1}, callback)
+// //IN MONGODB
+// // db.request.find({requestDate: {$gte: 1405631106357, $lte: 1467843787242}, region: "SF Bay Area"}, {requestDate: 1, outcome: 1, region:1}, callback)
 
-//IN MONGOOSE??
-// db.request.find({requestDate: {$gte: 1405631106357, $lte: 1467843787242}, region: "SF Bay Area"}, 'requestDate region outcome', callback)
+// //IN MONGOOSE??
+// // db.request.find({requestDate: {$gte: 1405631106357, $lte: 1467843787242}, region: "SF Bay Area"}, 'requestDate region outcome', callback)
 });
 
 
@@ -74,11 +81,11 @@ router.get('/', function(req, res, next) {
 	
 // // THIS WITH REGION SELECTION
 // 	console.log('req: ' + req.query.region)
-// 	var regionQuery = {region: req.query.region}
+	// var regionQuery = {region: req.query.region}
 // 	console.log ('query: ' + regionQuery.region )
 	
-// 	var outcomesData = getOutcomesData(regionQuery);
-// 	res.send(JSON.stringify(outcomesData));
+	// var outcomesData = getOutcomesData(regionQuery);
+	// res.send(JSON.stringify(outcomesData));
 	
 // 	// THIS WITHOUT REGION SELECTION
 // 	// var outcomesData = getOutcomesData();
@@ -93,6 +100,20 @@ router.get('/', function(req, res, next) {
 // });
 
 // var options = {}
+// function testOutcomesData(options){
+// 	Request.find({region: options.region}, callback)
+		
+// 		function callback(err, result) {
+// 				if (err) {
+// 					console.log("error " + err);
+// 				}
+// 				else {
+
+// 					res.send(JSON.stringify(result));
+// 				}
+// 			};
+// }
+
 function getOutcomesData(options) {
 		// use options.region to get the region
 		// use options.date to get the dates
@@ -191,7 +212,7 @@ function getOutcomesData(options) {
 	  "governmentId": {}
 	};
 
-	// return data;
+	return data;
 }
 
 module.exports = router;

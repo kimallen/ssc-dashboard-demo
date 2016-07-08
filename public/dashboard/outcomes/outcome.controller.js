@@ -54,6 +54,7 @@ function outcomeController($http){
         function getDatePickerOptions(){
 
             var datePickerOptions = {
+                'eventHandlers': {'apply.daterangepicker': function (ev, picker){console.log("eventHandler working!")}},
                 'showDropdowns': true,
                 'ranges': {
                     'Today': [moment(), moment()],
@@ -76,8 +77,8 @@ function outcomeController($http){
             console.log("startDate " + dateFilter.startDate + "endDate " + dateFilter.endDate)
             console.log("region " + regionFilter)
             // var apiUrlQuery = apiUrl + '?' + "startDate="dateFilter.startDate + "&endDate=" dateFilter.startDate + "&region=" + regionFilter.region
-            var apiUrlQuery = apiUrl + "?region=" + regionFilter
-            
+            var apiUrlQuery = apiUrl + "?region=" + regionFilter + "&startDate=" + dateFilter.startDate + "&endDate=" + dateFilter.endDate
+            console.log (apiUrlQuery)
             $http.get(apiUrlQuery)
             .then(storeResponseData) //immediately populates the charts
         };
