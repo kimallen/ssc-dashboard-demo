@@ -136,48 +136,70 @@ function countOutcomes(result){
     "governmentId",
     "primaryLanguage",
     "secondaryLanguage"]
+    
     var skeletonData = buildSkeletonData()
   // for each document
     //take the value of outcome
     //and for each demographic in demogs ARRAY, add 1 to the corresponding outcome value
-    console.log(result)
+    var justDemogs = _.drop(demogs)
     
+    _.forEach(result, function(doc){
 
-    for (var i = 0; i < result.length; i++) {
-      var doc = result[i]
       var outcome = doc.outcome
-      console.log(outcome)
-      for (var d = 1; d < demogs.length; d++) {
-        var demogValue = doc[demogs[d]]
-        console.log('demogValue ' + demogValue)
-        console.log(skeletonData[demogs[d]][demogValue])
-        //if demogValue is not an array do this:
-          skeletonData[demogs[d]][demogValue][outcome]++
-          skeletonData["ALL"]["Overall Outcomes"].outcome++
-        //if demogValue is an array, do this:
-      }
+      
+      _.forEach(justDemogs, function(demog){
+          var subDemog = doc[demog]
+          console.log("subDemog = " + subDemog)
+          if (Array.isArray(subDemog)){
 
-    }
+          }
+          else{
+            console.log("skeletonData[demog][subDemog] = " + skeletonData[demog][subDemog])
+            console.log(skeletonData[demog][subDemog]["Info Given"])
+            skeletonData[demog][outcome]++
+            skeletonData["ALL"][outcome]++
+          }
+
+      })
+      var outcomesData = skeletonData
+      console.log(outcomesData)
+    })    
+
+    // for (var i = 0; i < result.length; i++) {
+    //   var doc = result[i]
+    //   var outcome = doc.outcome
+    //   console.log(outcome)
+    //   for (var d = 1; d < demogs.length; d++) {
+    //     var demogValue = doc[demogs[d]]
+    //     console.log('demogValue ' + demogValue)
+    //     console.log(skeletonData[demogs[d]][demogValue])
+    //     //if demogValue is not an array do this:
+    //       skeletonData[demogs[d]][demogValue][outcome]++
+    //       skeletonData["ALL"]["Overall Outcomes"].outcome++
+    //     //if demogValue is an array, do this:
+    //   }
+
+    // }
 
 }
 
 
 
-function aggregateData(result){
+// function aggregateData(result){
   
-  //1) create a skeleton array of the desired data format:
-  buildSkeletonData()
- // 2) for each document (in result), add 1 to the outcome value for each demographic
-  countOutcomes()
+//   //1) create a skeleton array of the desired data format:
+//   buildSkeletonData()
+//  // 2) for each document (in result), add 1 to the outcome value for each demographic
+//   countOutcomes()
 
-  var newData = []
+//   var newData = []
   
 
 
-}
+// }
 
-console.log(buildSkeletonData())
-// console.log(countOutcomes(result))
+// console.log(buildSkeletonData())
+countOutcomes(result)
 
 
 
