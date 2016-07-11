@@ -43,7 +43,7 @@ var _ = require('lodash');
 
 var result = [{"_id":"577eae94c295aacb0e539780","region":"SF Bay Area","requestDate":"2014-07-18T19:33:40.121Z","age":"under 18, legally emanicipated","mentalIllness":"Yes, mental health diagnosis with no prescribed medication","english":"Limited","substanceAbuse":"Yes, while in trafficking situation","immigrationStatus":"Unsure; not clear from intake","primaryLanguage":"Some language","secondaryLanguage":"Some other language","timeToResponse":4,"timeToMaybe":15,"outcome":"Info Given","response":[{"No Response":3,"No":0,"Maybe":1}],"governmentId":["Social Security card"],"traffickingType":["Sex trafficking"],"genderId":["female"],"children":["Accompanying children/derivatives"],"disabilities":["Has hearing disabilities"],"historyOfViolence":["History of violent behavior"]},
 
-{"_id":"577eae94c295aacb0e539782","region":"SF Bay Area","requestDate":"2014-07-18T19:33:40.123Z","age":"under 18, legally emanicipated","mentalIllness":"Did not ask","english":"Basic","substanceAbuse":"Yes, substance use disorder as defined by the DSM-5","immigrationStatus":"US Citizen/Naturalized Citizen","primaryLanguage":"Some language","secondaryLanguage":"Some other language","timeToResponse":4,"timeToMaybe":19,"outcome":"No Placement","response":[{"No Response":0,"No":0,"Maybe":2}],"governmentId":["Did not ask"],"traffickingType":["Labor trafficking"],"genderId":["Transgender Male"],"children":["None"],"disabilities":["Accompanied by a service animal"],"historyOfViolence":["Current state of inflicting self-injury"]}]
+{"_id":"577eae94c295aacb0e539782","region":"SF Bay Area","requestDate":"2014-07-18T19:33:40.123Z","age":"under 18, legally emanicipated","mentalIllness":"Did not ask","english":"Basic","substanceAbuse":"Yes, substance use disorder as defined by the DSM-5","immigrationStatus":"US Citizen/Naturalized Citizen","primaryLanguage":"Some language","secondaryLanguage":"Some other language","timeToResponse":4,"timeToMaybe":19,"outcome":"No Placement","response":[{"No Response":0,"No":0,"Maybe":2}],"governmentId":["Did not ask"],"traffickingType":["Labor trafficking", "Sex trafficking", "Domestic violence"],"genderId":["Transgender Male"],"children":["None"],"disabilities":["Accompanied by a service animal"],"historyOfViolence":["Current state of inflicting self-injury"]}]
 
 function buildSkeletonData(){
 
@@ -88,29 +88,32 @@ function buildSkeletonData(){
     "traffickingType": traffickingOptns,
     "governmentId": governmentIdOptns,
     }
-
-  var outcomeNums = 
-      {"placement": 0,
-        "Info Given": 0,
-        "no placement": 0,
-        "Other": 0}
+    function outcomeNums(){
+      return {"Placement": 0,
+            "Info Given": 0,
+            "No Placement": 0,
+            "Other": 0}
+    }
 
   var skeletonData = {}
  
   _.forEach(demogs, function(subDemogs, demog){
+  
     
     var subSkeletonData = {}
     if (Array.isArray(subDemogs)){
 
       _.forEach(subDemogs, function(subDemog, i){
-        subSkeletonData[subDemogs[i]] = outcomeNums;
+        
+        subSkeletonData[subDemogs[i]] = outcomeNums();
       })
       
       skeletonData[demog]= subSkeletonData;
 
     }
     else{
-      subSkeletonData[subDemogs] = outcomeNums;
+      
+      subSkeletonData[subDemogs] = outcomeNums();
       skeletonData[demog] = subSkeletonData;
     }
 
@@ -122,7 +125,7 @@ function buildSkeletonData(){
 
 
 function countOutcomes(result){
-  var demogs = ["ALL",
+  var demogs = [
     "age",
     "substanceAbuse",
     "english",
@@ -134,36 +137,63 @@ function countOutcomes(result){
     "genderId",
     "traffickingType",
     "governmentId",
-    "primaryLanguage",
-    "secondaryLanguage"]
+    ]
     
-    var skeletonData = buildSkeletonData()
+  var skeletonData = buildSkeletonData()
+
+  
+
   // for each document
     //take the value of outcome
     //and for each demographic in demogs ARRAY, add 1 to the corresponding outcome value
-    var justDemogs = _.drop(demogs)
+  // var justDemogs = _.drop(demogs)
     
-    _.forEach(result, function(doc){
+  _.forEach(result, function(doc){
+    console.log("result = " + result)
+    console.log("DOCUMENT")
+    var outcome = doc.outcome
+    skeletonData["ALL"]["Overall Outcomes"][outcome]++
 
-      var outcome = doc.outcome
+    _.forEach(doc, function(value, key){
+      //just for the demographic measures
+      if (_.includes(demogs, key)){
+        console.log(key)
+        //if the demographic measure has more than one value
+        if (Array.isArray(value)){
+          _.forEach(value, function(answer){
+            skeletonData[key][answer][outcome]++
+          });
+        }
+        else{
+          //expected to add 1 to the specific outcome. ex. age: {"under 18, emancipated": {"Placement": 1}"
+          skeletonData[key][value][outcome]++
+          //expected to count all outcomes
+          console.log("outcome " + skeletonData[key][value][outcome])
+        }
+
+
+      };
+    });
       
-      _.forEach(justDemogs, function(demog){
-          var subDemog = doc[demog]
-          console.log("subDemog = " + subDemog)
-          if (Array.isArray(subDemog)){
+      // _.forEach(justDemogs, function(demog){
+      //     var subDemog = doc[demog]
+      //     console.log("demog = " + demog)
+      //     console.log("subDemog = " + subDemog)
+      //     if (Array.isArray(subDemog)){
+      //       console.log("in if %%%%%%%%%")
+      //     }
+      //     else{
+      //       console.log("in else ^^^^^^^^^^^^")
+      //       // console.log("skeletonData[demog][subDemog]['Info Given'] = " + skeletonData[demog][subDemog]["Info Given"])
+      //       console.log("skeletonData[demog][subDemog][outcome] = " + skeletonData[demog][subDemog][outcome])
+      //       skeletonData[demog][subDemog][outcome]++
+      //       skeletonData["ALL"]["Overall Outcomes"][outcome]++
+      //     }
 
-          }
-          else{
-            console.log("skeletonData[demog][subDemog] = " + skeletonData[demog][subDemog])
-            console.log(skeletonData[demog][subDemog]["Info Given"])
-            skeletonData[demog][outcome]++
-            skeletonData["ALL"][outcome]++
-          }
-
-      })
-      var outcomesData = skeletonData
-      console.log(outcomesData)
-    })    
+      // });
+  });    
+  var outcomesData = skeletonData
+  console.log(outcomesData)
 
     // for (var i = 0; i < result.length; i++) {
     //   var doc = result[i]
