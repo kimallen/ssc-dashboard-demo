@@ -88,12 +88,13 @@ function buildSkeletonData(){
     "traffickingType": traffickingOptns,
     "governmentId": governmentIdOptns,
     }
-    function outcomeNums(){
-      return {"Placement": 0,
-            "Info Given": 0,
-            "No Placement": 0,
-            "Other": 0}
-    }
+
+  function outcomeNums(){
+    return {"Placement": 0,
+          "Info Given": 0,
+          "No Placement": 0,
+          "Other": 0}
+  }
 
   var skeletonData = {}
  
@@ -149,67 +150,31 @@ function countOutcomes(result){
   // var justDemogs = _.drop(demogs)
     
   _.forEach(result, function(doc){
-    console.log("result = " + result)
-    console.log("DOCUMENT")
+    
     var outcome = doc.outcome
     skeletonData["ALL"]["Overall Outcomes"][outcome]++
 
-    _.forEach(doc, function(value, key){
+    _.forEach(doc, function(demogsValue, key){
       //just for the demographic measures
       if (_.includes(demogs, key)){
-        console.log(key)
-        //if the demographic measure has more than one value
-        if (Array.isArray(value)){
-          _.forEach(value, function(answer){
+        //if the demographic measure has more than one demogsValue
+        if (Array.isArray(demogsValue)){
+          _.forEach(demogsValue, function(answer){
             skeletonData[key][answer][outcome]++
           });
         }
         else{
-          //expected to add 1 to the specific outcome. ex. age: {"under 18, emancipated": {"Placement": 1}"
-          skeletonData[key][value][outcome]++
-          //expected to count all outcomes
-          console.log("outcome " + skeletonData[key][value][outcome])
+          skeletonData[key][demogsValue][outcome]++
         }
 
 
       };
     });
-      
-      // _.forEach(justDemogs, function(demog){
-      //     var subDemog = doc[demog]
-      //     console.log("demog = " + demog)
-      //     console.log("subDemog = " + subDemog)
-      //     if (Array.isArray(subDemog)){
-      //       console.log("in if %%%%%%%%%")
-      //     }
-      //     else{
-      //       console.log("in else ^^^^^^^^^^^^")
-      //       // console.log("skeletonData[demog][subDemog]['Info Given'] = " + skeletonData[demog][subDemog]["Info Given"])
-      //       console.log("skeletonData[demog][subDemog][outcome] = " + skeletonData[demog][subDemog][outcome])
-      //       skeletonData[demog][subDemog][outcome]++
-      //       skeletonData["ALL"]["Overall Outcomes"][outcome]++
-      //     }
+  });
 
-      // });
-  });    
   var outcomesData = skeletonData
   console.log(outcomesData)
-
-    // for (var i = 0; i < result.length; i++) {
-    //   var doc = result[i]
-    //   var outcome = doc.outcome
-    //   console.log(outcome)
-    //   for (var d = 1; d < demogs.length; d++) {
-    //     var demogValue = doc[demogs[d]]
-    //     console.log('demogValue ' + demogValue)
-    //     console.log(skeletonData[demogs[d]][demogValue])
-    //     //if demogValue is not an array do this:
-    //       skeletonData[demogs[d]][demogValue][outcome]++
-    //       skeletonData["ALL"]["Overall Outcomes"].outcome++
-    //     //if demogValue is an array, do this:
-    //   }
-
-    // }
+  return outcomesData
 
 }
 
