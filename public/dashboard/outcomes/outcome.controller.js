@@ -1,9 +1,9 @@
 
 angular
         .module('dashboard')
-        .controller("outcomeController", ['$http', outcomeController])
+        .controller("outcomeController", ['$http', '$scope', outcomeController])
 
-function outcomeController($http){
+function outcomeController($http, $scope){
         var vm = this
         vm.populateCharts = populateCharts
         vm.submitFilters = submitFilters
@@ -51,10 +51,16 @@ function outcomeController($http){
 
         // defaultDataByDatesRegion()
         // var datePickerOptions = getDatePickerOptions()
+        
+        $scope.$watch(function dateChange(scope){ return vm.datePicker.date}, function handleDateChange(){
+            console.log("Dates are being watched!!!!")
+            vm.submitFilters(vm.datePicker.date, vm.regionFilter.regionSelect)
+        })
+
         function getDatePickerOptions(){
 
             var datePickerOptions = {
-                'eventHandlers': {'apply.daterangepicker': function (ev, picker){console.log("eventHandler working!")}},
+                
                 'showDropdowns': true,
                 'ranges': {
                     'Today': [moment(), moment()],
@@ -113,9 +119,6 @@ function outcomeController($http){
             for (subDemographic in subDemographics){
                 var outcomes = subDemographics[subDemographic]
                 var chartConfig = getChartConfig(subDemographic, outcomes, colors)
-                // shows legend only for the last chart
-                
-
                 vm.chartConfigs.push(chartConfig);
             } //closes FOR loop
 

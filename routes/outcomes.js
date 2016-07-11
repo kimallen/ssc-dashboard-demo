@@ -39,8 +39,6 @@ router.get('/', function(req, res, next) {
 	  // Request.find({requestDate:{$gte: startDate, $lte: endDate}, region: "New Jersey"}, {requestDate: 1, outcome: 1, region:1}, callback)
 	
 	var regionQuery = {region: req.query.region}
-	console.log ('*****************************')
-	console.log("regionQuery = " + regionQuery.region)
 	
 			Request.find({region: regionQuery.region}, callback)
 		
