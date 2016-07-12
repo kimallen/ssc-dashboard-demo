@@ -3,19 +3,19 @@ var regionOptns =
 var ageOptns = 
 					["under 18, legally emanicipated", "under 18, not emancipated", "18-24", "25 and older"];
 var genderIds = 
-					["male", "female", "Transgender Male", "Transgender Female", "Other"];
+					["Male", "Female", "Transgender Male", "Transgender Female", "Other"];
 var childrenOptns = 
 					["None", "Pregnant past first trimester", "Accompanying children/derivatives"];
 var historyOptns = 
-					["None", "History of violent behavior", "History of aggression", "Current state of inflicting self-injury", "Current state of suicidal ideation", "Previous suicide attempt(s), Perpetrator of sexual abuse/violence"];
+					["None", "History of violent behavior", "History of aggression", "Current state of inflicting self-injury", "Current state of suicidal ideation", "Previous suicide attempt(s)", "Perpetrator of sexual abuse/violence"];
 var disabilityOptns = 
 					["None", "Needs elevator and ramp access", "Has visual disabilities", "Has hearing disabilities", "Accompanied by a service animal", "Other"];
 var governmentIdOptns = 
 					["None", "State ID", "Birth Certificate", "Social Security card", "Passport", "Passport ID", "Other", "Did not ask", "Unsure"];
 var substanceOptns = 
-					["None", "Unsure", "Yes, while in trafficking situation", "Yes recreationally", "Yes, substance use disorder as defined by the DSM-5" ];
+					["None", "Unsure", "Yes, while in trafficking situation", "Yes, recreationally", "Yes, substance use disorder as defined by the DSM-5" ];
 var immigrationOptns = 
-					["US Citizen/Naturalized Citizen", "Foreign National", "Unsure; not clear from intake"];
+					["US Citizen/Naturalized Citizen", "Foreign National", "Not clear from intake"];
 
 var englishProficiencyOptns = 
 					["Limited", "Basic", "Proficient"];

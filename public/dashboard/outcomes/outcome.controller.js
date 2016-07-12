@@ -7,7 +7,6 @@ function outcomeController($http, $scope){
         var vm = this
         vm.populateCharts = populateCharts
         vm.submitFilters = submitFilters
-        vm.testFunction = testFunction
         vm.chartConfigs = [];
         vm.demogFilter = { 
             demogSelect: "ALL",
@@ -30,14 +29,14 @@ function outcomeController($http, $scope){
             regionSelect: "ALL",
             regionOptions: [
                 {value: "ALL", name: "ALL"},
-                {value: "New Jersey", name: "New Jersey"},
-                {value: "SF Bay Area", name: "SF Bay Area"},
+                {value: "New+Jersey", name: "New Jersey"},
+                {value: "SF+Bay+Area", name: "SF Bay Area"},
                 {value: "Texas", name: "Texas"}
             ]
         }
         vm.datePicker = {}
         vm.datePicker.date = {
-            startDate: moment().subtract(2, 'years'),
+            startDate: 1447142400000,
             endDate: moment()
         }
         vm.datePickerOptions = getDatePickerOptions()
@@ -60,7 +59,7 @@ function outcomeController($http, $scope){
         function getDatePickerOptions(){
 
             var datePickerOptions = {
-                
+                'locale': {'format': 'MM/DD/YYYY'},
                 'showDropdowns': true,
                 'ranges': {
                     'Today': [moment(), moment()],
@@ -71,8 +70,8 @@ function outcomeController($http, $scope){
                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
                 },
                 'linkedCalendars': false,
-                'startDate': '01/05/2015',
-                'endDate': moment().subtract(2, 'month')
+                'startDate': '11/10/15',
+                'endDate': moment()
             }
             return datePickerOptions
         };
@@ -82,7 +81,6 @@ function outcomeController($http, $scope){
             console.log("in submitFilters function")
             console.log("startDate " + dateFilter.startDate + "endDate " + dateFilter.endDate)
             console.log("region " + regionFilter)
-            // var apiUrlQuery = apiUrl + '?' + "startDate="dateFilter.startDate + "&endDate=" dateFilter.startDate + "&region=" + regionFilter.region
             var apiUrlQuery = apiUrl + "?region=" + regionFilter + "&startDate=" + dateFilter.startDate + "&endDate=" + dateFilter.endDate
             console.log (apiUrlQuery)
             $http.get(apiUrlQuery)
@@ -237,7 +235,5 @@ function outcomeController($http, $scope){
                                   
             };//closes getChartConfig                            
         }; //closes populateCharts
-        function testFunction(){
-            console.log("test Function")
-        }
+        
     }; //closes outcomeController	
