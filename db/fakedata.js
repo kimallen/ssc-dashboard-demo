@@ -39,7 +39,7 @@ function createRecord(){
 	var randomResponseNum = Math.floor(Math.random() * (5));
 	var randomFirstNum = Math.floor(Math.random() * (5) + 1);
 	var randomFirstMaybeNum = Math.floor(Math.random() * (20) + 6);
-	var minDate = Date.now() - 2*360*24*60*60*1000
+	var minDate = 1447142400000 //11/10/2015
 	var randomDate = Math.floor(Math.random() * ((Date.now() - minDate)) + minDate)
 	// ISODate("2014-07-17T23:45:17.227Z");
 	db.request.insert({

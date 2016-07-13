@@ -38,22 +38,25 @@ router.get('/', function(req, res, next) {
   // var startDate = new Date(1405631106357);
   // var endDate = new Date(2467843787242);
   // Request.find({requestDate:{$gte: startDate, $lte: endDate}, region: "Texas"}, {requestDate: 1, outcome: 1, region:1}, callback)
- 
-	var startDate = {startDate: req.query.startDate};
-	var endDate = {endDate: req.query.endDate};
-	var regionQuery = {region: req.query.region};
+ 	
+ 	//not sure why i did it this way- leaving cuz maybe a reason?
+	// var startDate = {startDate: req.query.startDate};
+	// var endDate = {endDate: req.query.endDate};
+	// var regionQuery = {region: req.query.region};
 
-	console.log("query = " + req.query)
-	console.log("startDate = " + startDate)
-	console.log("endDate = " + endDate)
+	var startDate = new Date(parseInt(req.query.startDate))//new Date(req.query.startDate.parseInt());
+	var endDate = new Date(parseInt(req.query.endDate));
+	var regionQuery = req.query.region
+	console.log("query = " + JSON.stringify(req.query))
+	console.log("startDate = " + startDate.toString())
+	console.log("endDate = " + endDate.toString())
 	console.log("regionQuery = " + regionQuery)
 	if (regionQuery === "ALL"){
-		Request.find({requestDate:{$gte: startDate, $lte: endDate}}, {requestDate: 1, outcome: 1, region:1}, callback)
+		Request.find({requestDate:{$gte: startDate, $lte: endDate}}, callback)
 	}
 	else {
-	  Request.find({requestDate:{$gte: startDate, $lte: endDate}, region: regionQuery}, {requestDate: 1, outcome: 1, region:1}, callback)
+	  Request.find({requestDate:{$gte: startDate, $lte: endDate}, region: regionQuery}, callback)
 
-	// Request.find({region: regionQuery.region}, callback)
 	}
 		
 			function callback(err, result) {
@@ -61,12 +64,14 @@ router.get('/', function(req, res, next) {
 					console.log("error " + err);
 				}
 				else {
+					// console.log("result = " + result)
 					var aggregatedResults = aggregateResults(result); 
-					console.log(aggregateResults);
+					console.log("*****************************")
+					console.log(aggregatedResults);
 					res.send(JSON.stringify(aggregatedResults));
 				}
 			};
-				function buildSkeletonData(){
+function buildSkeletonData(){
 
   var regionOptns = 
             ["New Jersey","SF Bay Area","Texas"];
@@ -85,7 +90,7 @@ router.get('/', function(req, res, next) {
   var substanceOptns = 
             ["None","Unsure","Yes, while in trafficking situation","Yes, recreationally","Yes, substance use disorder as defined by the DSM-5" ];
   var immigrationOptns = 
-            ["US Citizen/Naturalized Citizen","Foreign National","Unsure; not clear from intake"];
+            ["US Citizen/Naturalized Citizen","Foreign National","Not clear from intake"];
 
   var englishProficiencyOptns = 
             ["Limited","Basic","Proficient"];
@@ -148,7 +153,7 @@ router.get('/', function(req, res, next) {
 }
 
 
-function aggregateResults(result){
+var aggregateResults = function(result){
   var demogs = [
     "age",
     "substanceAbuse",
@@ -166,41 +171,55 @@ function aggregateResults(result){
   var skeletonData = buildSkeletonData()
 
   _.forEach(result, function(doc){
-    
+    console.log("a document +++++++" + doc)
     var outcome = doc.outcome
     skeletonData["ALL"]["Overall Outcomes"][outcome]++
+   
+    _.forEach(demogs, function(demog){
 
-    _.forEach(doc, function(demogsValue, key){
-      //just for the demographic measures
-      if (_.includes(demogs, key)){
-        //if the demographic measure has more than one demogsValue
-        if (Array.isArray(demogsValue)){
-          _.forEach(demogsValue, function(answer){
-            skeletonData[key][answer][outcome]++
-          });
-        }
-        else{
-          skeletonData[key][demogsValue][outcome]++
-        }
+    	var demogValue = doc[demog]
+    	console.log("demog = " + demog)
+    	console.log("demogValue = " + demogValue)
+
+    	if (Array.isArray(demogValue)){
+    		_.forEach(demogValue, function(answer){
+    			skeletonData[demog][answer][outcome]++
+    		});
+    	}
+    	else{
+    		skeletonData[demog][demogValue][outcome]++
+    	}
+
+    })
+    // _.forEach(doc, function(demogsValue, key){
+    //   //just for the demographic measures
+    //   console.log("keys: " + doc[key])
+    //   if (_.includes(demogs, key)){
+    //   	console.log("inside doc !!!!!!!!!!!!!!!!!!!")
+    //   	// console.log("demographic: " + key)
+    //   	// console.log(demogsValue)
+    //     //if the demographic measure has more than one demogsValue
+    //     if (Array.isArray(demogsValue)){
+    //       _.forEach(demogsValue, function(answer){
+    //         console.log("answer = " + answer)
+    //         skeletonData[key][answer][outcome]++
+    //         console.log("num " + outcome + skeletonData[key][answer][outcome])
+    //       });
+    //     }
+    //     else{
+    //       skeletonData[key][demogsValue][outcome]++
+    //     }
 
 
-      };
-    });
+    //   };
+    // });
   });
 
   var aggregatedResults = skeletonData
   return aggregatedResults
 
 }
-	function aggregateResults(result) {
-		var aggregatedResults;
-
-		// do the transformation logic here
-		aggregatedResults = result; // just return the same results for now
-		// aggregatedResults = {test:"test"}
-
-		return aggregatedResults;
-	}
+	
 		
 
 // //IN MONGODB

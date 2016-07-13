@@ -13,15 +13,16 @@ function outcomeController($http, $scope){
             demogOptions: [
             {value: "ALL", name: "ALL"},
             {value: "age", name: "age"}, 
-            {value: "violence", name: "History of violence"},
+            {value: "historyOfViolence", name: "History of violence"},
             {value: "english", name: "English Proficiency"},
-            {value: "mental", name: "Current mental health" },
+            {value: "mentalIllness", name: "Current mental health" },
             {value: "substanceAbuse", name: "Current Substance Abuse"},
             {value: "immigrationStatus", name: "Immigration Status"},
             {value: "genderId", name: "Gender identity"},
             {value: "traffickingType", name: "Type of trafficking/violence"},
             {value: "children", name: "Accompanying Children"},
-            {value: "disability", name: "Physical disability"}
+            {value: "disabilities", name: "Physical disability"},
+            {value: "governmentId", name: "Government Id"}
             ]
         }
 
@@ -44,15 +45,12 @@ function outcomeController($http, $scope){
         var datesRegion = {}
         var outcomesData = {};
 
+        //This populates the charts
         var apiUrl = 'http://localhost:3000/api/outcomes'
         $http.get(apiUrl)
         .then(storeResponseData)
-
-        // defaultDataByDatesRegion()
-        // var datePickerOptions = getDatePickerOptions()
         
         $scope.$watch(function dateChange(scope){ return vm.datePicker.date}, function handleDateChange(){
-            console.log("Dates are being watched!!!!")
             vm.submitFilters(vm.datePicker.date, vm.regionFilter.regionSelect)
         })
 
@@ -78,11 +76,7 @@ function outcomeController($http, $scope){
 
         // // This function retrieves data from backend based on selected dates and ranges
         function submitFilters(dateFilter, regionFilter){
-            console.log("in submitFilters function")
-            console.log("startDate " + dateFilter.startDate + "endDate " + dateFilter.endDate)
-            console.log("region " + regionFilter)
             var apiUrlQuery = apiUrl + "?region=" + regionFilter + "&startDate=" + dateFilter.startDate + "&endDate=" + dateFilter.endDate
-            console.log (apiUrlQuery)
             $http.get(apiUrlQuery)
             .then(storeResponseData) //immediately populates the charts
         };
@@ -94,7 +88,8 @@ function outcomeController($http, $scope){
         };
 
         function populateDefaultChart(){
-            populateCharts("ALL")
+            filterType = vm.demogFilter.demogSelect
+            populateCharts(filterType)
         }
 
         // This uses data from api, takes in the filter type, and builds small multiples charts of each of the filter's categories
@@ -208,16 +203,16 @@ function outcomeController($http, $scope){
                           },
                           
                       series: [{
-                            name: "Placed",
-                            data: [[0, outcomes["placement"]]]
+                            name: "Placement",
+                            data: [[0, outcomes["Placement"]]]
                         },
                         {
-                            name: "Referred",
-                            data: [[0, outcomes["referred"]]]
+                            name: "Info Given",
+                            data: [[0, outcomes["Info Given"]]]
                         },
                          {
-                            name: 'Not placed',
-                            data: [[1, outcomes["referred"]]]
+                            name: 'No Placement',
+                            data: [[1, outcomes["No Placement"]]]
                         },
                         {
                             name: 'Other',
