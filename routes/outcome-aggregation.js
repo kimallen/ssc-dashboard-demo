@@ -67,10 +67,9 @@ function buildSkeletonData(){
     var subSkeletonData = {}
     if (Array.isArray(subDemogs)){
 
-      _.forEach(subDemogs, function(subDemog, i){
-        
+      _.forEach(subDemogs, (subDemog, i) => {
         subSkeletonData[subDemogs[i]] = outcomeNums();
-      })
+      });
       
       skeletonData[demog]= subSkeletonData;
 
@@ -89,7 +88,7 @@ function buildSkeletonData(){
 
 
 function sumOutcomesData(result){
-  var demogs = [
+  const demogs = [
     "age",
     "substanceAbuse",
     "english",
@@ -101,7 +100,7 @@ function sumOutcomesData(result){
     "genderId",
     "traffickingType",
     "governmentId",
-    ]
+    ];
     
   var skeletonData = buildSkeletonData()
 

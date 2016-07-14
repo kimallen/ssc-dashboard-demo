@@ -1,8 +1,7 @@
 
 <div id="selector-container">
   
-  <h2>Outcome of Requests for Shelter</h2>
-  <!-- <h3>by {{outcome.demogFilter.demogSelect}}</h3> -->
+  <h2>Outcomes of Requests for Beds</h2>
   <!-- Dropdown for dates -->
     <div id= "date-selector" class="selector">
       <label class="control-label">Date </label>
@@ -14,7 +13,7 @@
     <div id="region-selector" class="selector">
       <form name="regionSelect">
         <label for = "regionSelect">Region: </label><br>
-        <select class="form-control" name="demogSelect" ng-model="outcome.regionFilter.regionSelect" ng-change="outcome.submitFilters(outcome.datePicker.date, outcome.regionFilter.regionSelect)">
+        <select class="form-control" name="regionSelect" ng-model="outcome.regionFilter.regionSelect" ng-change="outcome.submitFilters(outcome.datePicker.date, outcome.regionFilter.regionSelect)">
           <option ng-repeat="option in outcome.regionFilter.regionOptions" value="{{option.value}}">
           {{option.name}}
           </option>
@@ -34,9 +33,9 @@
     </div>
   </div>
     
-
-
-    <p>Note: Individual participants can be represented in more than one graph. </p><p>(Ex. The outcome of an individual with a history of current suicidal ideation and a history of aggression will be a number in each of those graphs)</p>
+  <!-- <h3>Filtered by {{outcome.demogFilter.demogSelect}} in {{outcome.regionFilter.regionSelect}} region(s)</h3> -->
+    <p>Note: Individual participants can be represented in more than one graph. </p>
+    <p>(Ex. The outcome of an individual with a history of current suicidal ideation and a history of aggression will be a number in each of those graphs)</p>
  
   <div class="charts-block">
     
