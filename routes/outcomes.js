@@ -5,7 +5,7 @@ var _ = require('lodash');
 
 var o = require('./outcome-aggregation')
 // connecting to db
-var db = mongoose.connect('mongodb://localhost/ssc-fakedata')
+var db = mongoose.connect('mongodb://localhost/sscdb')
 
 // schema
 var requestSchema = new db.Schema({
@@ -24,33 +24,21 @@ var requestSchema = new db.Schema({
   governmentId: Array,
   primaryLanguage: String,
 	secondaryLanguage: String,
-	response: Array, //[{maybe: Number, no: Number, noResponse: Number }] 
-	timeToResponse: Number,
-	timeToMaybe: Number,
-	outcome: String // options: placed, Info given, No Placement, other
+	response: {Maybe: Number, No: Number, "No response": Number},
+	timeToFirstMaybe: Number,
+	timeToFirstResponse: Number,
+	outcome: String
 });
 
 db.model('Request', requestSchema, 'request')
 var Request = db.model('Request');
 
 router.get('/', function(req, res, next) {
-	  
-  // var startDate = new Date(1405631106357);
-  // var endDate = new Date(2467843787242);
-  // Request.find({requestDate:{$gte: startDate, $lte: endDate}, region: "Texas"}, {requestDate: 1, outcome: 1, region:1}, callback)
- 	
- 	//not sure why i did it this way- leaving cuz maybe a reason?
-	// var startDate = {startDate: req.query.startDate};
-	// var endDate = {endDate: req.query.endDate};
-	// var regionQuery = {region: req.query.region};
 
 	var startDate = new Date(parseInt(req.query.startDate))//new Date(req.query.startDate.parseInt());
 	var endDate = new Date(parseInt(req.query.endDate));
 	var regionQuery = req.query.region
-	console.log("query = " + JSON.stringify(req.query))
-	console.log("startDate = " + startDate.toString())
-	console.log("endDate = " + endDate.toString())
-	console.log("regionQuery = " + regionQuery)
+	
 	if (regionQuery === "ALL"){
 		Request.find({requestDate:{$gte: startDate, $lte: endDate}}, callback)
 	}
@@ -64,13 +52,11 @@ router.get('/', function(req, res, next) {
 					console.log("error " + err);
 				}
 				else {
-					// console.log("result = " + result)
 					var aggregatedResults = aggregateResults(result); 
-					console.log("*****************************")
-					console.log(aggregatedResults);
 					res.send(JSON.stringify(aggregatedResults));
 				}
 			};
+
 function buildSkeletonData(){
 
   var regionOptns = 
@@ -153,7 +139,7 @@ function buildSkeletonData(){
 }
 
 
-var aggregateResults = function(result){
+function aggregateResults(result){
   var demogs = [
     "age",
     "substanceAbuse",
@@ -171,15 +157,12 @@ var aggregateResults = function(result){
   var skeletonData = buildSkeletonData()
 
   _.forEach(result, function(doc){
-    console.log("a document +++++++" + doc)
     var outcome = doc.outcome
     skeletonData["ALL"]["Overall Outcomes"][outcome]++
    
     _.forEach(demogs, function(demog){
 
     	var demogValue = doc[demog]
-    	console.log("demog = " + demog)
-    	console.log("demogValue = " + demogValue)
 
     	if (Array.isArray(demogValue)){
     		_.forEach(demogValue, function(answer){
@@ -191,28 +174,7 @@ var aggregateResults = function(result){
     	}
 
     })
-    // _.forEach(doc, function(demogsValue, key){
-    //   //just for the demographic measures
-    //   console.log("keys: " + doc[key])
-    //   if (_.includes(demogs, key)){
-    //   	console.log("inside doc !!!!!!!!!!!!!!!!!!!")
-    //   	// console.log("demographic: " + key)
-    //   	// console.log(demogsValue)
-    //     //if the demographic measure has more than one demogsValue
-    //     if (Array.isArray(demogsValue)){
-    //       _.forEach(demogsValue, function(answer){
-    //         console.log("answer = " + answer)
-    //         skeletonData[key][answer][outcome]++
-    //         console.log("num " + outcome + skeletonData[key][answer][outcome])
-    //       });
-    //     }
-    //     else{
-    //       skeletonData[key][demogsValue][outcome]++
-    //     }
-
-
-    //   };
-    // });
+    
   });
 
   var aggregatedResults = skeletonData
@@ -220,119 +182,10 @@ var aggregateResults = function(result){
 
 }
 	
-		
-
-// //IN MONGODB
-// // db.request.find({requestDate: {$gte: 1405631106357, $lte: 1467843787242}, region: "SF Bay Area"}, {requestDate: 1, outcome: 1, region:1}, callback)
-
-// //IN MONGOOSE??
-// // db.request.find({requestDate: {$gte: 1405631106357, $lte: 1467843787242}, region: "SF Bay Area"}, 'requestDate region outcome', callback)
 });
 
 
-	
 
-
-
-
-function getOutcomesData(options) {
-
-	var data = { 
-	  "ALL":
-	    {
-	      "Overall Outcomes": {
-	        "placement": 23,
-	        "referred": 12,
-	        "no placement": 10,
-	        "Other": 6
-	      }
-	    },
-	  "age":
-	    {
-	      "Under 18, emancipated": {
-	        "placement": 1,
-	        "referred": 2,
-	        "no placement": 3,
-	        "Other": 0
-	      },
-	      "Under 18, not emancipated": {
-	        "placement": 3,
-	        "referred": 2,
-	        "no placement": 1,
-	        "Other": 1
-	      },
-	      "18-24": {
-	        "placement": 6,
-	        "referred": 2,
-	        "no placement": 1,
-	        "Other": 0
-	      },
-	      "25 and older": {
-	        "placement": 3,
-	        "referred": 1,
-	        "no placement": 2,
-	        "Other": 0
-	      }
-	    }
-	  ,
-	  "violence":
-	    {
-	      "No History of Violence": {
-	        "placement": 5,
-	        "referred": 3,
-	        "no placement": 2,
-	        "Other": 1
-	      },
-	      "History of Violent Behavior": {
-	        "placement": 15,
-	        "referred": 7,
-	        "no placement": 2,
-	        "Other": 0
-	      },
-	      "History of Aggression": {
-	        "placement": 12,
-	        "referred": 3,
-	        "no placement": 8,
-	        "Other": 1
-	      },
-	      "Inflicting Self-Injury": {
-	        "placement": 5,
-	        "referred": 3,
-	        "no placement": 2,
-	        "Other": 1
-	      },
-	      "Current Suicidal Ideation": {
-	        "placement": 4,
-	        "referred": 5,
-	        "no placement": 6,
-	        "Other": 1
-	      },
-	      "Previous Suicide Attempt": {
-	        "placement": 2,
-	        "referred": 3,
-	        "no placement": 3,
-	        "Other": 1
-	      },
-	      "Perpetrators": {
-	        "placement": 2,
-	        "referred": 4,
-	        "no placement": 16,
-	        "Other": 2
-	      }
-	    },
-	  "english": {},
-	  "mental": {},
-	  "substanceAbuseAbuse": {},
-	  "immigrationStatus": {},
-	  "genderId": {},
-	  "traffickingType": {},
-	  "children": {},
-	  "disability": {},
-	  "governmentId": {}
-	};
-
-	return data;
-}
 
 module.exports = router;
 

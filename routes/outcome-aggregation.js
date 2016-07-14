@@ -4,30 +4,33 @@ var _ = require('lodash');
 // exports.buildSkeletonData = buildSkeletonData()
 exports.aggregateResults = aggregateResults
  
- //  [{"_id":"577eae94c295aacb0e539780",
- //  "region":"SF Bay Area",
- //  "requestDate":"2014-07-18T19:33:40.121Z",
- //  "age":"under 18, legally emanicipated",
- //  "mentalIllness":"Yes, mental health diagnosis with no prescribed medication",
- //  "english":"Limited",
- //  "substanceAbuse":"Yes, while in trafficking situation"
- //  "immigrationStatus":"Unsure; not clear from intake",
- //  "primaryLanguage":"Some language",
- //  "secondaryLanguage":"Some other language","timeToResponse":4,
- //  "timeToMaybe":15,
- //  "outcome":"Info Given",
- //  "response":[{"No Response":3,"No":0,"Maybe":1}],
- //  "governmentId":["Social Security card"],"traffickingType":["Sex trafficking"],
- //  "genderId":["female"],
- //  "children":["Accompanying children/derivatives"],
- //  "disabilities":["Has hearing disabilities"],
- //  "historyOfViolence":["History of violent behavior"]},
- //  { next doc},
- //  { next doc}]
+ 
 
-var result = [{"_id":"577eae94c295aacb0e539780","region":"SF Bay Area","requestDate":"2014-07-18T19:33:40.121Z","age":"under 18, legally emanicipated","mentalIllness":"Yes, mental health diagnosis with no prescribed medication","english":"Limited","substanceAbuse":"Yes, while in trafficking situation","immigrationStatus":"Unsure; not clear from intake","primaryLanguage":"Some language","secondaryLanguage":"Some other language","timeToResponse":4,"timeToMaybe":15,"outcome":"Info Given","response":[{"No Response":3,"No":0,"Maybe":1}],"governmentId":["Social Security card"],"traffickingType":["Sex trafficking"],"genderId":["Female"],"children":["Accompanying children/derivatives"],"disabilities":["Has hearing disabilities"],"historyOfViolence":["History of violent behavior"]},
+// var result = [{"_id":"577eae94c295aacb0e539780",
+// "region":"SF Bay Area",
+// "requestDate":"2014-07-18T19:33:40.121Z",
+// "age":"under 18, legally emanicipated",
+// "mentalIllness":"Yes, mental health diagnosis with no prescribed medication","english":"Limited",
+// "substanceAbuse":"Yes, while in trafficking situation",
+// "immigrationStatus":"Unsure; not clear from intake",
+// "primaryLanguage":"Some language",
+// "secondaryLanguage":"Some other language",
+// "timeToResponse":4,
+// "timeToMaybe":15,
+// "outcome":"Info Given",
+// "response":[{"No Response":3,
+// "No":0,
+// "Maybe":1}],
+// "governmentId":["Social Security card"],
+// "traffickingType":["Sex trafficking"],
+// "genderId":["Female"],
+// "children":["Accompanying children/derivatives"],
+// "disabilities":["Has hearing disabilities"],
+// "historyOfViolence":["History of violent behavior"]},
+// {next doc},
+// {next doc}]
 
-{"_id":"577eae94c295aacb0e539782","region":"SF Bay Area","requestDate":"2014-07-18T19:33:40.123Z","age":"under 18, legally emanicipated","mentalIllness":"Did not ask","english":"Basic","substanceAbuse":"Yes, substance use disorder as defined by the DSM-5","immigrationStatus":"US Citizen/Naturalized Citizen","primaryLanguage":"Some language","secondaryLanguage":"Some other language","timeToResponse":4,"timeToMaybe":19,"outcome":"No Placement","response":[{"No Response":0,"No":0,"Maybe":2}],"governmentId":["Did not ask"],"traffickingType":["Labor trafficking", "Sex trafficking", "Domestic violence"],"genderId":["Transgender Male"],"children":["None"],"disabilities":["Accompanied by a service animal"],"historyOfViolence":["Current state of inflicting self-injury"]}]
+
 
 function buildSkeletonData(){
 
