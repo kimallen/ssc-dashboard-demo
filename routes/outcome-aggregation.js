@@ -1,36 +1,10 @@
 
 var _ = require('lodash');
 
-// exports.buildSkeletonData = buildSkeletonData()
-exports.aggregateResults = aggregateResults
- 
- 
+var exports = module.exports= {};
 
-// var result = [{"_id":"577eae94c295aacb0e539780",
-// "region":"SF Bay Area",
-// "requestDate":"2014-07-18T19:33:40.121Z",
-// "age":"under 18, legally emanicipated",
-// "mentalIllness":"Yes, mental health diagnosis with no prescribed medication","english":"Limited",
-// "substanceAbuse":"Yes, while in trafficking situation",
-// "immigrationStatus":"Unsure; not clear from intake",
-// "primaryLanguage":"Some language",
-// "secondaryLanguage":"Some other language",
-// "timeToResponse":4,
-// "timeToMaybe":15,
-// "outcome":"Info Given",
-// "response":[{"No Response":3,
-// "No":0,
-// "Maybe":1}],
-// "governmentId":["Social Security card"],
-// "traffickingType":["Sex trafficking"],
-// "genderId":["Female"],
-// "children":["Accompanying children/derivatives"],
-// "disabilities":["Has hearing disabilities"],
-// "historyOfViolence":["History of violent behavior"]},
-// {next doc},
-// {next doc}]
-
-
+exports.buildSkeletonData = buildSkeletonData;
+exports.sumOutcomesData = sumOutcomesData;
 
 function buildSkeletonData(){
 
@@ -51,7 +25,7 @@ function buildSkeletonData(){
   var substanceOptns = 
             ["None","Unsure","Yes, while in trafficking situation","Yes, recreationally","Yes, substance use disorder as defined by the DSM-5" ];
   var immigrationOptns = 
-            ["US Citizen/Naturalized Citizen","Foreign National","Unsure; not clear from intake"];
+            ["US Citizen/Naturalized Citizen","Foreign National","Not clear from intake"];
 
   var englishProficiencyOptns = 
             ["Limited","Basic","Proficient"];
@@ -114,7 +88,7 @@ function buildSkeletonData(){
 }
 
 
-var aggregateResults = function(result){
+function sumOutcomesData(result){
   var demogs = [
     "age",
     "substanceAbuse",
@@ -132,34 +106,31 @@ var aggregateResults = function(result){
   var skeletonData = buildSkeletonData()
 
   _.forEach(result, function(doc){
-    
     var outcome = doc.outcome
     skeletonData["ALL"]["Overall Outcomes"][outcome]++
+   
+    _.forEach(demogs, function(demog){
 
-    _.forEach(doc, function(demogsValue, key){
-      //just for the demographic measures
-      if (_.includes(demogs, key)){
-        //if the demographic measure has more than one demogsValue
-        if (Array.isArray(demogsValue)){
-          _.forEach(demogsValue, function(answer){
-            // console.log("answer = " + answer)
-            skeletonData[key][answer][outcome]++
-            // console.log("num " + outcome + skeletonData[key][answer][outcome])
-          });
-        }
-        else{
-          skeletonData[key][demogsValue][outcome]++
-        }
+      var demogValue = doc[demog]
 
+      if (Array.isArray(demogValue)){
+        _.forEach(demogValue, function(answer){
+          skeletonData[demog][answer][outcome]++
+        });
+      }
+      else{
+        skeletonData[demog][demogValue][outcome]++
+      }
 
-      };
-    });
+    })
+    
   });
 
-  var aggregatedResults = skeletonData
-  return aggregatedResults
+  var outcomesData = skeletonData
+  return outcomesData
 
-}
+};
+  
 
 
 
