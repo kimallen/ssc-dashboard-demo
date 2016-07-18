@@ -25,7 +25,6 @@ function outcomeController($http, $scope){
             {value: "governmentId", name: "Government Id"}
             ]
         }
-
         vm.regionFilter = {
             regionSelect: "ALL",
             regionOptions: [
