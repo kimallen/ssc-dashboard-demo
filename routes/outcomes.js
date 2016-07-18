@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var config = require('./../config')
 var _ = require('lodash');
 
 var o = require('./outcome-aggregation')
 // connecting to db
-var db = mongoose.connect('mongodb://localhost/sscdb')
+var db = mongoose.connect(config.db.url)
 
 // schema
 var requestSchema = new db.Schema({
