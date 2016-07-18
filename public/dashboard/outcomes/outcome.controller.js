@@ -45,8 +45,7 @@ function outcomeController($http, $scope){
         var outcomesData = {};
 
         //This populates the charts
-        var apiUrl = 'http://localhost:3000/api/outcomes'
-        $http.get(apiUrl)
+        $http.get(outcomeUrl)
         .then(storeResponseData)
         
         $scope.$watch(function dateChange(scope){ return vm.datePicker.date}, function handleDateChange(){
@@ -75,7 +74,7 @@ function outcomeController($http, $scope){
 
         // // This function retrieves data from backend based on selected dates and ranges
         function submitFilters(dateFilter, regionFilter){
-            var apiUrlQuery = apiUrl + "?region=" + regionFilter + "&startDate=" + dateFilter.startDate + "&endDate=" + dateFilter.endDate
+            var apiUrlQuery = outcomeUrl + "?region=" + regionFilter + "&startDate=" + dateFilter.startDate + "&endDate=" + dateFilter.endDate
             $http.get(apiUrlQuery)
             .then(storeResponseData) //immediately populates the charts
         };
@@ -146,7 +145,9 @@ function outcomeController($http, $scope){
                             colors: colors,
                             chart: {
                                   type: 'column',
-                                  marginTop: 100
+                                  marginTop: 100,
+                                  borderWidth: 5,
+                                  borderColor: '#abbdc3'
                             },
                             title: {
                                 text: 'by ' + subDemographic,

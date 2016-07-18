@@ -1,6 +1,6 @@
 
 var _ = require('lodash');
-
+var config = require ('./../config')
 var exports = module.exports= {};
 
 exports.buildSkeletonData = buildSkeletonData;
@@ -9,7 +9,7 @@ exports.sumOutcomesData = sumOutcomesData;
 function buildSkeletonData(){
 
   var regionOptns = 
-            ["New Jersey","SF Bay Area","Texas"];
+            ["New Jersey", "SF Bay Area", "Texas"];
   var ageOptns = 
             ["under 18, legally emanicipated","under 18, not emancipated","18-24","25 and older"];
   var genderOptns = 

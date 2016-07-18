@@ -1,7 +1,10 @@
 
+
 angular
         .module('dashboard')
         .config( ['$stateProvider', '$urlRouterProvider', config] )
+
+var outcomeUrl = 'http://localhost:3000/api/outcomes';
 
 function config($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise("/home");

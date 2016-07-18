@@ -1,5 +1,7 @@
-var regionOptns = 
-					["New Jersey", "SF Bay Area", "Texas"];
+var config = require("./../config")
+
+var regionOptns = config.regions;
+					
 var ageOptns = 
 					["under 18, legally emanicipated", "under 18, not emancipated", "18-24", "25 and older"];
 var genderIds = 
