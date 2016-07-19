@@ -1,0 +1,58 @@
+
+<div id="selector-container">
+  
+  <h2>Outcomes of Requests for Beds</h2>
+  <!-- Dropdown for dates -->
+    <div id= "date-selector" class="selector">
+      <label class="control-label">Date </label>
+      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+      <b class="caret"></b>
+      <input date-range-picker id="report-range" class="form-control date-picker" type="text" min="'2015-11-10'" max="" ng-model="outcome.datePicker.date" options= "outcome.datePickerOptions"/>
+    </div>
+  <!-- Dropdown for Regions -->
+    <div id="region-selector" class="selector">
+      <form name="regionSelect">
+        <label for = "regionSelect">Region: </label><br>
+        <select class="form-control" name="regionSelect" ng-model="outcome.regionFilter.regionSelect" ng-change="outcome.submitFilters(outcome.datePicker.date, outcome.regionFilter.regionSelect)">
+          <option ng-repeat="option in outcome.regionFilter.regionOptions" value="{{option.value}}">
+          {{option.name}}
+          </option>
+        </select>
+      </form>
+    </div> 
+  
+    <!-- Dropdown for Demographic Filters -->
+    <div id="demog-selector" class="selector">
+      <form name="demogFilters">
+        <label for="demogSelect"> Demographic Filter: </label><br>
+        <select class="form-control" name="demogSelect" ng-model="outcome.demogFilter.demogSelect" ng-change="outcome.populateCharts(outcome.demogFilter.demogSelect)" >
+          <option ng-repeat="option in outcome.demogFilter.demogOptions" value="{{option.value}}">{{option.name}}
+          </option>
+        </select>
+      </form>
+    </div>
+  </div>
+    
+  <!-- <h3>Filtered by {{outcome.demogFilter.demogSelect}} in {{outcome.regionFilter.regionSelect}} region(s)</h3> -->
+    <p>Note: Individual participants can be represented in more than one graph. </p>
+    <p>(Ex. The outcome of an individual with a history of current suicidal ideation and a history of aggression will be a number in each of those graphs)</p>
+ 
+  <div class="charts-block">
+    
+    <!-- Legend -->
+    <div class="legend">
+      <div ng-repeat="item in outcome.legendAttr">
+        <div class="legend-item" ng-style="{'background-color': item.color}">
+        </div>
+        {{item.label}}
+      </div>
+    </div>
+    
+    <!-- small multiples charts -->
+    <div id="charts">
+      <div ng-repeat="chartConfig in outcome.chartConfigs" class="small-multiples">
+          <highchart class="small-single" id="{{chartConfig.id}}" config="chartConfig"></highchart>
+      </div>
+    </div>
+  </div>
+
