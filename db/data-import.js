@@ -4,7 +4,7 @@ var _ = require('lodash');
 
 
 // connecting to db
-var db = mongoose.connect('mongodb://localhost/sscdb')
+var db = mongoose.connect(process.env.APIURL)
 
 // schema
 var requestSchema = new db.Schema({

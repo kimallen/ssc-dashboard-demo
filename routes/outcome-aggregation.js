@@ -9,7 +9,7 @@ exports.sumOutcomesData = sumOutcomesData;
 function buildSkeletonData(){
 
   var regionOptns = 
-            ["New Jersey", "SF Bay Area", "Texas"];
+            config.regions;
   var ageOptns = 
             ["under 18, legally emanicipated","under 18, not emancipated","18-24","25 and older"];
   var genderOptns = 

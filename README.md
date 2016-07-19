@@ -1,4 +1,4 @@
-# ssc-dashboard-prototype
+# SSC Dashboard
 This app allows Caravan staff to explore visualizations of the data collected from the Safe Shelters Collaborative app.
 
 ## Technologies

@@ -4,7 +4,10 @@ angular
         .module('dashboard')
         .config( ['$stateProvider', '$urlRouterProvider', config] )
 
-var outcomeUrl = 'http://localhost:3000/api/outcomes';
+const OUTCOMEURL = 'http://localhost:3000/api/outcomes';
+const REGIONFILTERS={region1:{value: "New+Jersey", name: "New Jersey"},
+                region2:{value: "SF+Bay+Area", name: "SF Bay Area"},
+                region3:{value: "Texas", name: "Texas"}}
 
 function config($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise("/home");

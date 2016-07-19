@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var config = require('./../config')
 var _ = require('lodash');
-
+// var requestSchema = require('./../db/schemas/schema.request.js')
 var o = require('./outcome-aggregation')
 // connecting to db
 var db = mongoose.connect(config.db.url)
@@ -36,7 +36,7 @@ var Request = db.model('Request');
 
 router.get('/', function(req, res, next) {
 
-	var startDate = new Date(parseInt(req.query.startDate))//new Date(req.query.startDate.parseInt());
+	var startDate = new Date(parseInt(req.query.startDate))
 	var endDate = new Date(parseInt(req.query.endDate));
 	var regionQuery = req.query.region
 	
