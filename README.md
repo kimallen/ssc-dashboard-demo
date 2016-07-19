@@ -7,6 +7,7 @@ stack (MEAN):
   * Express
   * MongoDB
   * NodeJS
+
 ## Dependencies
 * Bootstrap 3.2.0
 * JQuery
