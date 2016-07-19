@@ -29,9 +29,9 @@ function outcomeController($http, $scope){
             regionSelect: "ALL",
             regionOptions: [
                 {value: "ALL", name: "ALL"},
-                {value: "New+Jersey", name: "New Jersey"},
-                {value: "SF+Bay+Area", name: "SF Bay Area"},
-                {value: "Texas", name: "Texas"}
+                REGIONFILTERS.region1,
+                REGIONFILTERS.region2,
+                REGIONFILTERS.region3
             ]
         }
         vm.datePicker = {}
@@ -45,7 +45,7 @@ function outcomeController($http, $scope){
         var outcomesData = {};
 
         //This populates the charts
-        $http.get(outcomeUrl)
+        $http.get(OUTCOMEURL)
         .then(storeResponseData)
         
         $scope.$watch(function dateChange(scope){ return vm.datePicker.date}, function handleDateChange(){
@@ -74,7 +74,7 @@ function outcomeController($http, $scope){
 
         // // This function retrieves data from backend based on selected dates and ranges
         function submitFilters(dateFilter, regionFilter){
-            var apiUrlQuery = outcomeUrl + "?region=" + regionFilter + "&startDate=" + dateFilter.startDate + "&endDate=" + dateFilter.endDate
+            var apiUrlQuery = OUTCOMEURL + "?region=" + regionFilter + "&startDate=" + dateFilter.startDate + "&endDate=" + dateFilter.endDate
             $http.get(apiUrlQuery)
             .then(storeResponseData) //immediately populates the charts
         };

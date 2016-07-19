@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var config = require('./../config')
 var _ = require('lodash');
-var requestSchema = require('./../db/schemas/schema.request.js')
+// var requestSchema = require('./../db/schemas/schema.request.js')
 var o = require('./outcome-aggregation')
 // connecting to db
 var db = mongoose.connect(config.db.url)
