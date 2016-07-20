@@ -7,11 +7,10 @@ angular
 
 //change these values for configuration changes
 const OUTCOMEURL = 'http://localhost:3000/api/outcomes';
-const REGIONFILTERS={region1:{value: "New+Jersey", name: "New Jersey"},
-                region2:{value: "SF+Bay+Area", name: "SF Bay Area"},
-                region3:{value: "Texas", name: "Texas"}}
+const REGIONFILTERS={region1:{value: "Fantasia", name: "Fantasia"},
+                region2:{value: "Atlantis", name: "Atlantis"},
+                region3:{value: "Mount+Olympus", name: "Mount Olympus"}}
 var demoMode = true;
-
 
 demoState()
 function demoState(){

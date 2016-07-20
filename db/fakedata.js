@@ -1,6 +1,7 @@
-var config = require("./../config")
+// var config = require("./../config")
 
-var regionOptns = config.regions;
+// var regionOptns = config.regions;
+var regionOptns = ["Fantasia", "Atlantis", "Mount Olympus"];
 					
 var ageOptns = 
 					["under 18, legally emanicipated", "under 18, not emancipated", "18-24", "25 and older"];
