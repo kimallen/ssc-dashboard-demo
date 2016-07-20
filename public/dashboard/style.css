@@ -56,7 +56,11 @@ a:hover {
 a:active {
     color: darkblue;
 }
-
+/*for demonstration visibility or not */
+#demo {
+	display: none;
+	font-size: 2em;
+}
 #report-range{
 	width: 250px;
 }

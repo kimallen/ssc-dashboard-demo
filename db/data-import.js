@@ -4,7 +4,7 @@ var _ = require('lodash');
 
 
 // connecting to db
-var db = mongoose.connect(process.env.APIURL)
+var db = mongoose.connect(process.env.DBURL)
 
 // schema
 var requestSchema = new db.Schema({
