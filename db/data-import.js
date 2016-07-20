@@ -2,7 +2,6 @@
 var mongoose = require('mongoose');
 var _ = require('lodash');
 
-
 // connecting to db
 var db = mongoose.connect(process.env.DBURL)
 
