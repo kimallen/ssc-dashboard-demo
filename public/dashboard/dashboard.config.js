@@ -1,11 +1,8 @@
-// config.demo = true;
-//then put into ??appropriate file??:
-
 angular
         .module('dashboard')
         .config( ['$stateProvider', '$urlRouterProvider', config] )
 
-//change these values for configuration changes
+//change these  3 values for configuration changes
 const OUTCOMEURL = 'http://localhost:3000/api/outcomes';
 const REGIONFILTERS={region1:{value: "Fantasia", name: "Fantasia"},
                 region2:{value: "Atlantis", name: "Atlantis"},
