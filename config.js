@@ -2,9 +2,9 @@ var config = {};
 
 config.db = {};
 
-config.db.url = process.env.DBURL;
+config.db.url = process.env.MONGODB_URI;
 
-config.regions = process.env.REGIONS;
+config.regions = process.env.REGIONS.split(",");
 
 config.demo = true;
 //then put into ??appropriate file??:
