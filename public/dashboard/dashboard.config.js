@@ -3,7 +3,10 @@ angular
         .config( ['$stateProvider', '$urlRouterProvider', config] )
 
 //change these  3 values for configuration changes
-const OUTCOMEURL = 'http://localhost:3000/api/outcomes';
+//for heroku app use 'https://ssc-dashboard.herokuapp.com/'
+const OUTCOMEURL = 'https://ssc-dashboard.herokuapp.com/api/outcomes';
+//for local app use 'http://localhost:5000/api/outcomes'
+// const OUTCOMEURL = 'http://localhost:5000/api/outcomes';
 const REGIONFILTERS={region1:{value: "Fantasia", name: "Fantasia"},
                 region2:{value: "Atlantis", name: "Atlantis"},
                 region3:{value: "Mount+Olympus", name: "Mount Olympus"}}
