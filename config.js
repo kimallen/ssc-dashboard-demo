@@ -1,8 +1,10 @@
 var config = {};
 
 config.db = {};
-
+//for production
 config.db.url = process.env.MONGODB_URI;
+//for local
+// config.db.url = process.env.DBURL;
 
 config.regions = process.env.REGIONS.split(",");
 

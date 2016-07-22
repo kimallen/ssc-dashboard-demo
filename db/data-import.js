@@ -1,9 +1,9 @@
-
+require('dotenv').config();
 var mongoose = require('mongoose');
 var _ = require('lodash');
 
 // connecting to db
-var db = mongoose.connect(process.env.MONGODB_URI)
+var db = mongoose.connect(config.db.url)
 
 // schema
 var requestSchema = new db.Schema({

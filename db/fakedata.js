@@ -1,7 +1,7 @@
 // var config = require("./../config")
 
 // var regionOptns = config.regions;
-var regionOptns = ["Fantasia", "Atlantis", "Mount Olympus"];
+var regionOptns = ["Wonderland", "Atlantis", "Mount Olympus"];
 					
 var ageOptns = 
 					["under 18, legally emanicipated", "under 18, not emancipated", "18-24", "25 and older"];
@@ -26,7 +26,7 @@ var mentalIllnessOptns =
 					["None disclosed", "Did not ask", "Yes, mental health diagnosis with no prescribed medication", "Yes, compliant with medication for mental health diagnosis", "Yes, noncompliant with medication for mental health diagnosis"];
 var traffickingOptns = 
 					["Labor trafficking", "Sex trafficking", "Domestic violence", "Sexual assault", "Other"];
-var outcomeOptns = ["Placement", "Info Given", "No Placement", "Other"];
+var outcomeOptns = ["Placement", "Info Given"];
 
 function randomize (demogOptions){
 	var randomIndex = Math.floor(Math.random() * (demogOptions.length));

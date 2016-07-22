@@ -7,7 +7,7 @@ angular
 const OUTCOMEURL = 'https://ssc-dashboard.herokuapp.com/api/outcomes';
 //for local heroku app use 'http://localhost:5000/api/outcomes'
 // const OUTCOMEURL = 'http://localhost:5000/api/outcomes';
-const REGIONFILTERS={region1:{value: "Fantasia", name: "Fantasia"},
+const REGIONFILTERS={region1:{value: "Wonderland", name: "Wonderland"},
                 region2:{value: "Atlantis", name: "Atlantis"},
                 region3:{value: "Mount+Olympus", name: "Mount Olympus"}}
 var demoMode = true;
@@ -16,7 +16,6 @@ demoState()
 function demoState(){
      var el = document.getElementById('demo');
     if (demoMode === true){
-         console.log('visible ' + el)
          el.style.display='block';
         }
 };
