@@ -1,7 +1,7 @@
-angular
-	.module('dashboard')
-	.controller('homeController', ['$http', homeController])
+// angular
+// 	.module('dashboard')
+// 	.controller('homeController', ['$http', homeController])
 
-	function homeController($http){
+// 	function homeController($http){
 
-	}
+// 	}

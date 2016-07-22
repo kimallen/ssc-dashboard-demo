@@ -1,4 +1,4 @@
-var config = require("./../config")
+// var config = require("./../config")
 
 // var regionOptns = config.regions;
 var regionOptns = ["Fantasia", "Atlantis", "Mount Olympus"];

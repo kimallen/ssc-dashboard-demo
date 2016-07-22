@@ -1,5 +1,10 @@
-# SSC Dashboard
-This app allows Caravan staff to explore visualizations of the data collected from the Safe Shelters Collaborative app.
+
+# Safe Shelter Collaborative Dashboard
+
+A project for Caravan Studios, a division of TechSoup
+
+The Safe Shelter Collaborative program finds shelter and funding alternatives for survivors of domestic violence and human trafficking.  This dashboard collects data from bed requests made by shelters and the responses.
+
 
 ## Technologies
 stack (MEAN): 
