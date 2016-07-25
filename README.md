@@ -43,6 +43,7 @@ Add these constants:
 region3:{value: "Mount+Olympus", name: "Mount Olympus"}}
 ```
 (add your own region names, and use a + in place of any spaces in the value of value)
+
   ```var demo=false ``` change to true if test data only
   
   To seed with demo data:
