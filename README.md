@@ -47,6 +47,7 @@ region3:{value: "Mount+Olympus", name: "Mount Olympus"}}
   ```var demo=false ``` change to true if test data only
   
 To seed with demo data:
+
 1. Go to db/fakedata.js and replace your region names in var regionOptns
  
 2. Open to mongo shell: ```>mongo```
