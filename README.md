@@ -51,8 +51,8 @@ To seed with demo data:
  
 2. Open to mongo shell: ```>mongo```
  
-3. ```>use <test db name>```
+3.```>use <test db name>```
 
-4. ```>load('db/fakedata.js')```
+4.```>load('db/fakedata.js')```
 
-5. ```>createMultipleRecords(n)``` or ```createRecord()```
+5.```>createMultipleRecords(n)``` or ```createRecord()```
