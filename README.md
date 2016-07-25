@@ -46,10 +46,9 @@ region3:{value: "Mount+Olympus", name: "Mount Olympus"}}
 
   ```var demo=false ``` change to true if test data only
   
-  To seed with demo data:
-   1. Go to db/fakedata.js and replace your region names in var regionOptns
-   2. Open to mongo shell
-   ```mongo```
-   3. ```use <test db name>```
-   4. ```load('db/fakedata.js')```
-   5. ```createMultipleRecords(n)``` or ```createRecord()```
+To seed with demo data:
+1. Go to db/fakedata.js and replace your region names in var regionOptns
+2. Open to mongo shell: ```>mongo```
+4. ```>use <test db name>```
+5. ```>load('db/fakedata.js')```
+6. ```>createMultipleRecords(n)``` or ```createRecord()```
