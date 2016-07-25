@@ -29,8 +29,8 @@ To configure:
 2. ```npm install```
 3. In root of the app, create a .env file
 Add these constants:
-```REGIONS="region_name1,region_name2,region_name3"``` substituting your custom region names, no space after commas
-	```MONGODB_URL=<your db url here>```
+```REGIONS="region_name1,region_name2,region_name3"``` (substitute your custom region names, no space after commas)
+```MONGODB_URL=<your db url here>```
 4. In dashboard.config.js:
 
  ```const OUTCOMEURL= <your host url/api/outcomes>```
