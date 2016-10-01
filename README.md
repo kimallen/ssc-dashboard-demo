@@ -8,6 +8,8 @@ The Safe Shelter Collaborative program finds shelter and funding alternatives fo
   * Aggregates data from information collected from bed requests and responses to and from shelters.
   * User can filter outcomes of bed requests by demographic, region, and date
 
+![image of outcomes column charts with demographic filter options](/imgs/outcomesbydemog.png)
+
 ## Future Functionality
   * Build out a landing page that visually shows key stats for each info area
   * Build out filterable charts showing a breakdown of response types to bed requests and results of bed requests over time
