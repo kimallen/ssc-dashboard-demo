@@ -1,4 +1,4 @@
-# Safe Shelter Collaborative Dashboard
+# Safe Shelter Collaborative Dashboard (demo version)
 
 A project for Caravan Studios, a division of TechSoup
 

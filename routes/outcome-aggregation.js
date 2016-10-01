@@ -34,7 +34,6 @@ function buildSkeletonData(){
   var traffickingOptns = 
             ["Labor trafficking","Sex trafficking","Domestic violence","Sexual assault","Other"];
   
-
   var outcomeOptns = ["Placement","Info Given","No Placement","Other"];
 
 
@@ -62,7 +61,6 @@ function buildSkeletonData(){
   var skeletonData = {}
  
   _.forEach(demogs, function(subDemogs, demog){
-  
     
     var subSkeletonData = {}
     if (Array.isArray(subDemogs)){
@@ -85,7 +83,6 @@ function buildSkeletonData(){
   return skeletonData
   
 }
-
 
 function sumOutcomesData(result){
   const demogs = [
