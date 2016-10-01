@@ -1,9 +1,17 @@
-# Safe Shelter Collaborative Dashboard
+# Safe Shelter Collaborative Dashboard (demo version)
 
-A project for Caravan Studios, a division of TechSoup
+This is public-facing demonstration version of a project built for Caravan Studios, a division of TechSoup
 
 The Safe Shelter Collaborative program finds shelter and funding alternatives for survivors of domestic violence and human trafficking.  This dashboard collects data from bed requests made by shelters and the responses.
 
+## Features
+  * Aggregates data from information collected from bed requests and responses to and from shelters.
+  * User can filter outcomes of bed requests by demographic, region, and date
+
+## Future Functionality
+  * Build out a landing page that visually shows key stats for each info area
+  * Build out filterable charts showing a breakdown of response types to bed requests and results of bed requests over time
+  * Show visualizations of the demographics of people being served
 
 ## Technologies
 stack (MEAN): 

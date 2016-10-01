@@ -3,7 +3,7 @@ angular
         .config( ['$stateProvider', '$urlRouterProvider', config] )
 
 //change these  3 values for configuration changes
-//for heroku app use 'https://ssc-dashboard.herokuapp.com/'
+//for heroku app use 'https://ssc-dashboard.herokuapp.com/api/outcomes'
 const OUTCOMEURL = 'https://ssc-dashboard.herokuapp.com/api/outcomes';
 //for local heroku app use 'http://localhost:5000/api/outcomes'
 // const OUTCOMEURL = 'http://localhost:5000/api/outcomes';
