@@ -11,9 +11,9 @@ The Safe Shelter Collaborative program finds shelter and funding alternatives fo
 ![image of outcomes column charts with demographic filter options](/imgs/outcomesbydemog.png)
 
 ## Future Functionality
-  * Build out a landing page that visually shows key stats for each info area
-  * Build out filterable charts showing a breakdown of response types to bed requests and results of bed requests over time
-  * Show visualizations of the demographics of people being served
+  * A landing page that visually shows key stats for each info area
+  * Filterable charts showing a breakdown of response types to bed requests and results of bed requests over time
+  * Visualizations of the demographics of people being served
 
 ## Technologies
 stack (MEAN): 
