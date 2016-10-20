@@ -12,7 +12,8 @@ The Safe Shelter Collaborative program finds shelter and funding alternatives fo
 
 ## Future Functionality
   * A landing page that visually shows key stats for each info area
-  * Filterable charts showing a breakdown of response types to bed requests and results of bed requests over time
+  * Filterable charts comparing response types to bed requests
+  * Filterable charts showing the results of bed requests over time
   * Visualizations of the demographics of people being served
 
 ## Technologies
