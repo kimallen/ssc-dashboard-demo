@@ -61,7 +61,7 @@ To seed with demo data:
 
 1. Go to db/fakedata.js and replace your region names in var regionOptns
  
-2. Open to mongo shell: ```>mongo```
+2. Open to mongo shell: ```>mongo``` or ```>mongo <MONGO_URI>```
  
 3.```>use <test db name>```
 

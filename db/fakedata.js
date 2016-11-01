@@ -26,7 +26,10 @@ var mentalIllnessOptns =
 					["None disclosed", "Did not ask", "Yes, mental health diagnosis with no prescribed medication", "Yes, compliant with medication for mental health diagnosis", "Yes, noncompliant with medication for mental health diagnosis"];
 var traffickingOptns = 
 					["Labor trafficking", "Sex trafficking", "Domestic violence", "Sexual assault", "Other"];
-var outcomeOptns = ["Placement", "Info Given"];
+// var outcomeOptns = ["Placement", "Info Given", "No Placement", "Other"];
+// var outcomeOptns = ["Placement", "Info Given"];
+var outcomeOptns = ["No Placement", "Other"];
+
 
 function randomize (demogOptions){
 	var randomIndex = Math.floor(Math.random() * (demogOptions.length));
